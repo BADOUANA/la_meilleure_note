@@ -2,14 +2,18 @@ package com.epf.ratingA.models;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
+@Builder
 @Table(name = "film")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 public class Film {
     @Id
@@ -25,6 +29,10 @@ public class Film {
     private Integer time;
     @Column(name = "category")
     private String category;
+    @Column(name = "image")
+    @Lob
+    private byte[] affiche; // Pour stocker l'image en tant que BLOB (Binary Large Object)
+
 
     @ManyToOne
     @JoinColumn(name = "user_id")

@@ -1,12 +1,16 @@
 package com.epf.ratingA.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Builder
 @Table(name = "rate")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 public class Rate {
     @Id
