@@ -28,6 +28,9 @@ public class FilmController {
     @PostMapping("")
     public void addFilm(@RequestBody FilmDto filmDto){}
 
+    @PutMapping("/{id}")
+    public void updateFilm(@RequestBody FilmDto filmDto, @PathVariable Long id){filmService.updateFilm(filmDto,id);}
+
     @DeleteMapping("/{id}")
     public void deleteFilm(@PathVariable Long filmId){}
 

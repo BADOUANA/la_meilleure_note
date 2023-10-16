@@ -1,5 +1,6 @@
 package com.epf.ratingA.controllers;
 
+import com.epf.ratingA.dto.UserDto;
 import com.epf.ratingA.models.Film;
 import com.epf.ratingA.models.User;
 import com.epf.ratingA.services.UserService;
@@ -21,4 +22,13 @@ public class UserController {
     public List<Film> getFilmsByUserId(@RequestParam Long userId){
         return (userId != null)? userService.findAllFilmsByUserId(userId): null;
     }
+
+    @PostMapping("")
+    public void addUser(@RequestBody UserDto userDto){ userService.createUser(userDto);}
+
+    @PutMapping("/{id}")
+    public void updateUser(@RequestBody UserDto userDto,@PathVariable Long id){userService.updateUser(userDto,id);}
+
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Long id){userService.deleteById(id);}
 }
