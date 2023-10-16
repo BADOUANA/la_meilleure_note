@@ -2,12 +2,15 @@ package com.epf.ratingA.mappers;
 
 import com.epf.ratingA.dto.UserDto;
 import com.epf.ratingA.models.User;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
 import java.io.IOException;
 
-
-public class UserMapper {
-    public static UserDto fromDto(User user)throws IOException {
+@Mapper
+public interface UserMapper {
+    static UserDto fromDto(User user)throws IOException {
         return UserDto.builder()
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
@@ -17,4 +20,12 @@ public class UserMapper {
                 .role(user.isRole())
                 .build();
     }
+
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+
+    @Mapping(target = "id", source = "user.id")
+    UserDto toUserDto(User user)throws IOException;
+
+    User fromUserDto(UserDto userDto, Long id)throws IOException;
+
 }
