@@ -1,6 +1,7 @@
 package com.epf.ratingA.models;
 
 
+import com.epf.ratingA.enumer.Category;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,7 +29,7 @@ public class Film {
     @Column(name = "time")
     private Integer time;
     @Column(name = "category")
-    private String category;
+    private List<Category> category;
     @Column(name = "image")
     @Lob
     private byte[] affiche; // Pour stocker l'image en tant que BLOB (Binary Large Object)

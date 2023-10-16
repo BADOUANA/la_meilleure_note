@@ -15,6 +15,6 @@ public class FilmDto {
     private String author;
     private String outDate;
     private Integer time;
-    private byte affiche;
+    private byte[] affiche;
     private List<Category> categories;
 }

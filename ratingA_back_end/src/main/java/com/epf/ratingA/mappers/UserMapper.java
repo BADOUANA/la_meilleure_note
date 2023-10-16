@@ -5,16 +5,16 @@ import com.epf.ratingA.models.User;
 
 import java.io.IOException;
 
+
 public class UserMapper {
-   /* public static User fromDto(UserDto userDto, Long id)throws IOException {
-        return new User.UserBuilder()
-                .id(id)
-                .firstName(userDto.getFirstName())
-                .lastName(userDto.getLastName())
-                .birthdate(userDto.getBirthdate())
-                .sexe(userDto.getSexe())
-                .email(userDto.getEmail())
-                .role(userDto.isRole())
+    public static UserDto fromDto(User user)throws IOException {
+        return UserDto.builder()
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .birthdate(user.getBirthdate())
+                .sexe(user.getSexe())
+                .email(user.getEmail())
+                .role(user.isRole())
                 .build();
-    }*/
+    }
 }
