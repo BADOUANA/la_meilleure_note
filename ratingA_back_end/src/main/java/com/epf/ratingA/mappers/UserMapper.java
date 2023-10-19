@@ -17,7 +17,7 @@ public interface UserMapper {
                 .birthdate(user.getBirthdate())
                 .sexe(user.getSexe())
                 .email(user.getEmail())
-                .role(user.isRole())
+                .role(user.getRole())
                 .build();
     }
 

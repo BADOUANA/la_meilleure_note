@@ -1,10 +1,14 @@
 package com.epf.ratingA.dto;
 
+import com.epf.ratingA.enumer.Role;
+import com.epf.ratingA.models.Film;
+import com.epf.ratingA.models.Rate;
 import jakarta.persistence.Column;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.time.Instant;
+import java.util.List;
 
 @Builder
 @Getter
@@ -12,9 +16,11 @@ public class UserDto {
     private Long id;
     private String firstName;
     private String lastName;
-    private boolean role;
+    private Role role;
     private String email;
     private Instant birthdate;
     private String sexe;
     private String password;
+    private List<Film> films;
+    private List<Rate> rates;
 }

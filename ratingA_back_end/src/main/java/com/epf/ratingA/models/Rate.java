@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Builder
-@Table(name = "rate")
+@Table(name = "rates")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -26,4 +26,8 @@ public class Rate {
     @ManyToOne
     @JoinColumn(name = "film_id")
     private Film film;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

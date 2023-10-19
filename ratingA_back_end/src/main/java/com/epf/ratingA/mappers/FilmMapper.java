@@ -14,7 +14,7 @@ public interface FilmMapper {
                 .author(Film.getAuthor())
                 .time(Film.getTime())
                 .title(Film.getTitle())
-                .affiche(Film.getAffiche())
+                //.affiche(Film.getAffiche())
                 .outDate(Film.getOutDate())
                 .categories(Film.getCategory())
                 .build();
