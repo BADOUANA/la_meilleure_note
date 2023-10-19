@@ -13,6 +13,7 @@ VALUES
     ('Forrest Gump', 'Robert Zemeckis', '1994-07-06', 'Drama', NULL, 'Life is like a box...'),
     ('The Dark Knight', 'Christopher Nolan', '2008-07-18', 'Action', NULL, 'Why so serious?'),
     ('Pulp Fiction', 'Quentin Tarantino', '1994-10-14', 'Crime', NULL, 'The path of the...');*/
+
 INSERT INTO films (title, author, out_date, time, category, user_id, image_id)
 VALUES
     ('The Shawshank Redemption', 'Frank Darabont', '1994-09-23', 120, ARRAY['Action', 'Drama'], 1, 1),

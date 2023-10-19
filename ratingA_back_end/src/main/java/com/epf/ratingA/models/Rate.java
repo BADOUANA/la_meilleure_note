@@ -16,6 +16,8 @@ public class Rate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRate;
+    @Column(name = "name")
+    private String name;
     @Column(name = "note")
     private float note;
     @Column(name = "summary")
