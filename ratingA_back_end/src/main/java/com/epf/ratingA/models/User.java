@@ -37,11 +37,11 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "film")
+    @ManyToMany(mappedBy = "films")
     @JsonIgnore
     private List<Film> films;
 
-    @OneToMany(mappedBy = "Rate",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "rates",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<Rate> rates;
 
@@ -49,7 +49,5 @@ public class User {
     @JoinColumn(name = "image_id", referencedColumnName = "id")
     @JsonIgnore
     private Image image;
-
-
 
 }

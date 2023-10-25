@@ -30,10 +30,10 @@ VALUES
     ('Very Good', 4.5, 'Recommended for moviegoers', 'A superhero masterpiece...', 3, 2),
     ('Excellent', 5.0, 'A cinematic classic', 'Memorable dialogues...', 2, 4);
 
-INSERT INTO images (name, title, film_id,user_id)
+INSERT INTO images ( title, film_id,user_id)
 VALUES
-    ('Image 1', NULL, NULL,1),
-    ('Image 2', NULL, NULL,2),
-    ('Image 3', NULL, 3, NULL),
-    ('Image 4', NULL, 4,NULL),
-    ('Image 5', NULL, NULL,5);
+    ('Image 1', NULL,1),
+    ('Image 2', NULL,2),
+    ('Image 3', 3, NULL),
+    ('Image 4', 4,NULL),
+    ('Image 5', NULL,5);

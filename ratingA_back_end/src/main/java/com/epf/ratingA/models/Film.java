@@ -32,9 +32,12 @@ public class Film {
     @Column(name = "category")
     private List<Category> category;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @ManyToMany
+    @JoinTable(
+            name = "user_film",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "film_idFilm"))
+    private List<User> user;
 
     @OneToMany(mappedBy = "rate", cascade = CascadeType.ALL)
     private List<Rate> rates;
