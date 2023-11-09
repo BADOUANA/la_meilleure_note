@@ -1,12 +1,25 @@
-drop table images;
+
 drop table rates;
 DROP TABLE films;
 drop table users;
+drop table images;
+/*drop table user_film;*/
 
-drop table user_image;
+/*drop table user_image;
 drop table film_image;
 drop table film_rate;
-drop table user_rate;
+drop table user_rate;*/
+
+CREATE TABLE images (
+                        id SERIAL PRIMARY KEY,
+                        bytes BYTEA,
+                        title TEXT/*,
+                        user_id INT NULL,
+                        film_id INT NULL*/
+    /*FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (film_id) REFERENCES films(idFilm)*/
+);
+
 
 CREATE TABLE users (
                        id SERIAL PRIMARY KEY,
@@ -17,7 +30,7 @@ CREATE TABLE users (
                        sex VARCHAR NOT NULL,
                        birthdate TIMESTAMPTZ,
                        password VARCHAR,
-                       image_id INT
+                       image_id INT REFERENCES images(id)
                        /*FOREIGN KEY (image_id) REFERENCES images(id)*/
 );
 
@@ -28,7 +41,7 @@ CREATE TABLE films (
                        out_date DATE,
                        time INT,
                        category VARCHAR[],
-                       image_id INT
+                       image_id INT REFERENCES images (id)
                        /*FOREIGN KEY (image_id) REFERENCES images(id)*/
 );
 
@@ -38,29 +51,20 @@ CREATE TABLE rates (
                        note FLOAT NOT NULL,
                        summary TEXT,
                        detail_summary TEXT,
-                       film_id INT,
-                       user_id INT
+                       film_id INT REFERENCES films (idFilm),
+                       user_id INT REFERENCES users (id)
                        /*FOREIGN KEY (film_id) REFERENCES films(idFilm),
                        FOREIGN KEY (user_id) REFERENCES users(id)*/
 );
 
 
-CREATE TABLE images (
-                        id SERIAL PRIMARY KEY,
-                        bytes BYTEA,
-                        title TEXT,
-                        user_id INT NULL,
-                        film_id INT NULL
-                        /*FOREIGN KEY (user_id) REFERENCES users(id),
-                        FOREIGN KEY (film_id) REFERENCES films(idFilm)*/
-);
 
-create table user_film
+/*create table user_film
 (
     id SERIAL PRIMARY KEY,
     user_id int not null,
     film_id int not null
-);
+);*/
 
 
 /*
