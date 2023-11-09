@@ -5,6 +5,8 @@ import com.epf.ratingA.models.Film;
 import com.epf.ratingA.models.User;
 import com.epf.ratingA.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,19 +18,33 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/listUsers")
-    public List<User> getAllUsers(){return userService.findAll();}
-    @GetMapping("/{id}/userfilms")
-    public List<Film> getFilmsByUserId(@RequestParam Long userId){
-        return (userId != null)? userService.findAllFilmsByUserId(userId): null;
+    @GetMapping("/list")
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.findAll();
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @PostMapping("")
-    public void addUser(@RequestBody UserDto userDto){ userService.createUser(userDto);}
+    @GetMapping("/{id}/films")
+    public ResponseEntity<List<Film>> getFilmsByUserId(@PathVariable Long id) {
+        List<Film> films = (id != null) ? userService.findAllFilmsByUserId(id) : null;
+        return new ResponseEntity<>(films, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> addUser(@RequestBody UserDto userDto) {
+        userService.createUser(userDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 
     @PutMapping("/{id}")
-    public void updateUser(@RequestBody UserDto userDto,@PathVariable Long id){userService.updateUser(userDto,id);}
+    public ResponseEntity<Void> updateUser(@RequestBody UserDto userDto, @PathVariable Long id) {
+        userService.updateUser(userDto, id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id){userService.deleteById(id);}
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
