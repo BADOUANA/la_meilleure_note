@@ -11,6 +11,11 @@ import java.util.List;
 
 @Repository
 public interface UserDao extends JpaRepository<User,Long> {
-    @Query("SELECT u.films FROM User u WHERE u.id= :userId")
+
+    User findUserByFirstNameAndLastName(String firstName, String lastName);
+
+    //@Query("SELECT f FROM Film f JOIN Rate r ON f.idFilm = r.film.idFilm WHERE r.user.id= :userId")
+
+    @Query("SELECT f FROM Film f JOIN f.rates r WHERE r.user.id= :userId")
     List<Film> getAllFilmsFromUser(Long id);
 }

@@ -34,6 +34,19 @@ public class UserService {
         }
     }
 
+    public List<Film> findAllFilmsByUserName(String firstName, String lastName){
+        try {
+            User user = userDao.findUserByFirstNameAndLastName(firstName, lastName);
+
+            if (user == null) {
+                throw new NoSuchElementException("User not found");
+            }
+            return userDao.getAllFilmsFromUser(user.getId());
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
     @Transactional
     public void deleteById(Long userId){userDao.deleteById(userId);}
 

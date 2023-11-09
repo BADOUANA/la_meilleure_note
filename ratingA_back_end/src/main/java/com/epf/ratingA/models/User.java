@@ -37,9 +37,9 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(mappedBy = "films")
+    /*@ManyToMany(mappedBy = "films")
     @JsonIgnore
-    private List<Film> films;
+    private List<Film> films;*/
 
     @OneToMany(mappedBy = "rates",cascade = CascadeType.REMOVE)
     @JsonIgnore

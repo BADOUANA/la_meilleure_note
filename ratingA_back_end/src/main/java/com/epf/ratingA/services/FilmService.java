@@ -19,6 +19,7 @@ public class FilmService {
     public List<Film> findAll(){return filmDao.findAll();}
     public List<Film> findAllBestFilmByRates(){return filmDao.getBestFilmByRates();}
     public List<Rate> findRatesByFilmId(Long id){return filmDao.getAllRatesFromFilm(id);}
+    public Film findFilmByTitle(String title){return filmDao.findFilmByTitle(title);}
 
     public Long createFilm(FilmDto filmDto){
         try {
@@ -41,5 +42,10 @@ public class FilmService {
     }
 
     public void deleteFilm(Long id){filmDao.deleteById(id);}
+
+
+    public List<Film> searchFilmsByTitle(String searchTerm) {
+        return filmDao.searchByTitle(searchTerm);
+    }
 
 }
