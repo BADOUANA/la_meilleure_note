@@ -31,12 +31,9 @@ public class FilmService implements IFilmService {
     @Override
     public Film findFilmByTitle(String title){return filmDao.findFilmByTitle(title);}
 
-    @Override
+    /*@Override
     public FilmDto createFilm(FilmDto filmDto) throws FilmException {
         try {
-           /*Film film = filmMapper.filmDtoToFilm(filmDto);
-            Film filmCreated = filmDao.save(film);
-            return filmCreated.getIdFilm();*/
                 Film film = Film.builder()
                         .idFilm(filmDto.getIdFilm())
                         .title(filmDto.getTitle())
@@ -53,6 +50,17 @@ public class FilmService implements IFilmService {
             } catch (FilmException ex) {
                 throw new RuntimeException(ex);
             }
+        }
+    }*/
+    @Override
+    public FilmDto createFilm(FilmDto filmDto) throws FilmException {
+        try {
+            Film film = filmMapper.filmDtoToFilm(filmDto);
+            Film savedFilm = filmDao.save(film);
+            return filmMapper.filmToFilmDto(savedFilm);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new FilmException();
         }
     }
     @Override
