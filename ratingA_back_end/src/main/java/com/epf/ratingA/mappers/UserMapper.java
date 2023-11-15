@@ -23,7 +23,6 @@ public interface UserMapper {
 
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    @Mapping(target = "id", source = "user.id")
     UserDto toUserDto(User user)throws IOException;
 
     User fromUserDto(UserDto userDto, Long id)throws IOException;

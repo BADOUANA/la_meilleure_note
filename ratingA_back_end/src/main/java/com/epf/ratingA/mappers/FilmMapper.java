@@ -7,14 +7,14 @@ import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
 
 @Mapper(componentModel = "spring")
-@Component("filmMapper")
+@Component("FilmMapper")
 public interface FilmMapper {
-    @Mapping(source = "category", target = "categories")
-    @Mapping(source = "image.id", target = "imageId")
-    FilmDto filmToFilmDto(Film film);
-
     @Mapping(source = "categories", target = "category")
     @Mapping(source = "imageId", target = "image.id")
+    FilmDto filmToFilmDto(Film film);
+
+    @Mapping(source = "category", target = "categories")
+    @Mapping(source = "image.id", target = "imageId")
 
     Film filmDtoToFilm(FilmDto filmDto);
 }

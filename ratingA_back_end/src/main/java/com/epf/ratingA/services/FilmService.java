@@ -17,7 +17,6 @@ import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class FilmService implements IFilmService {
     private final FilmDao filmDao;
@@ -43,7 +42,6 @@ public class FilmService implements IFilmService {
                         .title(filmDto.getTitle())
                         .author(filmDto.getAuthor())
                         .outDate(filmDto.getOutDate())
-
                         .time(filmDto.getTime())
                         .category(filmDto.getCategories())
                         .build();
