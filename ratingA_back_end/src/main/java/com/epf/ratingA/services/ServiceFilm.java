@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
-public class FilmService {
+public class ServiceFilm {
     private final FilmDao filmDao;
 
     public List<Film> findAll(){return filmDao.findAll();}

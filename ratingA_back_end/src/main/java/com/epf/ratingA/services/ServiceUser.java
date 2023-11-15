@@ -5,18 +5,15 @@ import com.epf.ratingA.dto.UserDto;
 import com.epf.ratingA.mappers.UserMapper;
 import com.epf.ratingA.models.Film;
 import com.epf.ratingA.models.User;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
-public class UserService {
+public class ServiceUser {
 
     @Autowired
     private UserDao userDao;

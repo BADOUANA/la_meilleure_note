@@ -4,7 +4,6 @@ import com.epf.ratingA.dao.FilmDao;
 import com.epf.ratingA.dao.RateDao;
 import com.epf.ratingA.dao.UserDao;
 import com.epf.ratingA.dto.RateDto;
-import com.epf.ratingA.mappers.RateMapper;
 import com.epf.ratingA.models.Film;
 import com.epf.ratingA.models.Rate;
 import com.epf.ratingA.models.User;
@@ -12,13 +11,11 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class RateService {
+public class ServiceRate {
     private final RateDao rateDao;
     private final FilmDao filmDao;
     private final UserDao userDao;

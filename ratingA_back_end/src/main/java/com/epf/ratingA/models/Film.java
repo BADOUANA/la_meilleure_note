@@ -39,7 +39,7 @@ public class Film {
             inverseJoinColumns = @JoinColumn(name = "film_idFilm"))
     private List<User> user;*/
 
-    @OneToMany(mappedBy = "rate", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private List<Rate> rates;
 
     @OneToOne

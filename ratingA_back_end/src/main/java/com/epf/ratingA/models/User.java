@@ -41,7 +41,7 @@ public class User {
     @JsonIgnore
     private List<Film> films;*/
 
-    @OneToMany(mappedBy = "rates",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<Rate> rates;
 
