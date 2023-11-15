@@ -3,9 +3,10 @@ package com.epf.ratingA.services;
 import com.epf.ratingA.dao.FilmDao;
 import com.epf.ratingA.dto.FilmDto;
 import com.epf.ratingA.exceptions.FilmException;
-import com.epf.ratingA.interfaces.IFilmServiceImpl;
+import com.epf.ratingA.interfaces.IFilmService;
 import com.epf.ratingA.mappers.FilmMapper;
 import com.epf.ratingA.models.Film;
+import com.epf.ratingA.models.Image;
 import com.epf.ratingA.models.Rate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ import java.util.stream.Stream;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class FilmServiceImpl implements IFilmServiceImpl {
+public class FilmService implements IFilmService {
     private final FilmDao filmDao;
     private final FilmMapper filmMapper;
 

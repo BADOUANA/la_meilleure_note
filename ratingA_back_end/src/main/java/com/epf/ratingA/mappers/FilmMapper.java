@@ -3,22 +3,18 @@ package com.epf.ratingA.mappers;
 import com.epf.ratingA.dto.FilmDto;
 import com.epf.ratingA.models.Film;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+import org.mapstruct.Mapping;
+import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-
-@Mapper
+@Mapper(componentModel = "spring")
+@Component("filmMapper")
 public interface FilmMapper {
-    public static FilmDto fromDto(Film Film)throws IOException {
-        return FilmDto.builder()
-                .author(Film.getAuthor())
-                .time(Film.getTime())
-                .title(Film.getTitle())
-                //.affiche(Film.getAffiche())
-                .outDate(Film.getOutDate())
-                .categories(Film.getCategory())
-                .build();
-    }
-    FilmMapper INSTANCE = Mappers.getMapper(FilmMapper.class);
-    Film fromFilmDto(FilmDto filmDto, Long id) throws IOException;
+    @Mapping(source = "category", target = "categories")
+    @Mapping(source = "image.id", target = "imageId")
+    FilmDto filmToFilmDto(Film film);
+
+    @Mapping(source = "categories", target = "category")
+    @Mapping(source = "imageId", target = "image.id")
+
+    Film filmDtoToFilm(FilmDto filmDto);
 }

@@ -36,7 +36,7 @@ public class FilmController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> addFilm(@RequestBody FilmDto filmDto) {
+    public ResponseEntity<Void> addFilm(@RequestBody FilmDto filmDto) throws Exception {
         filmService.createFilm(filmDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
