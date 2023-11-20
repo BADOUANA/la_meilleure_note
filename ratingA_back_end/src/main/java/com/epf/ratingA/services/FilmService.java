@@ -14,9 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Stream;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class FilmService implements IFilmService {
     private final FilmDao filmDao;
@@ -55,6 +55,7 @@ public class FilmService implements IFilmService {
     @Override
     public FilmDto createFilm(FilmDto filmDto) throws FilmException {
         try {
+
             Film film = filmMapper.filmDtoToFilm(filmDto);
             Film savedFilm = filmDao.save(film);
             return filmMapper.filmToFilmDto(savedFilm);
@@ -64,13 +65,16 @@ public class FilmService implements IFilmService {
         }
     }
     @Override
-    public void updateFilm(FilmDto filmDto, Long filmId){
-        filmDao.findById(filmId).orElseThrow(()->new NoSuchElementException("Film doesn't exist"));
+    public void updateFilm(FilmDto filmDto, Long filmId) throws FilmException{
         try {
-          /*  Film film = FilmMapper.INSTANCE.filmDtoToFilm(filmDto);
-            filmDao.save(film);*/
+            Film existingFilm = filmDao.findById(filmId)
+                    .orElseThrow(() -> new NoSuchElementException("Film doesn't exist"));
+
+            Film updatedFilm = filmMapper.updateFilmFromDto(filmDto, existingFilm);
+            filmDao.save(updatedFilm);
         }catch (Exception e){
             e.printStackTrace();
+            throw new FilmException();
         }
     }
 

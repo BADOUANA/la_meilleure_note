@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
-@RequestMapping("films")
+@CrossOrigin("localhost:8081")
+@RequestMapping("/films")
 @RestController
 @RequiredArgsConstructor
 public class FilmController {

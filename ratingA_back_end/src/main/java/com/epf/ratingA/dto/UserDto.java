@@ -3,15 +3,19 @@ package com.epf.ratingA.dto;
 import com.epf.ratingA.enumer.Role;
 import com.epf.ratingA.models.Film;
 import com.epf.ratingA.models.Rate;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import java.time.Instant;
 import java.util.List;
 
 @Builder
+@RequiredArgsConstructor
+@AllArgsConstructor
 @Getter
+@Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
     private Long id;
     private String firstName;
