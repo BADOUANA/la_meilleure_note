@@ -1,5 +1,5 @@
 package com.epf.ratingA.enumer;
 
 public enum Category {
-    Action,Drama,Comedy,Romance,Thriller,Mystery,ScienceFiction,Adventure,Horror,Crime
+    ACTION,DRAMA,COMEDY,ROMANCE,THRILLER,MYSTERY,SCIENCE_FICTION,ADVENTURE,HORROR,CRIME
 }

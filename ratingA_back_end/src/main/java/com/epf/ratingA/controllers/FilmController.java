@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
-@RequestMapping("films")
+@CrossOrigin("localhost:8081")
+@RequestMapping("/films")
 @RestController
 @RequiredArgsConstructor
 public class FilmController {
@@ -36,7 +36,7 @@ public class FilmController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> addFilm(@RequestBody FilmDto filmDto) {
+    public ResponseEntity<Void> addFilm(@RequestBody FilmDto filmDto) throws Exception {
         filmService.createFilm(filmDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

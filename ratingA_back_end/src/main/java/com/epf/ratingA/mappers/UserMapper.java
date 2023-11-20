@@ -4,28 +4,21 @@ import com.epf.ratingA.dto.UserDto;
 import com.epf.ratingA.models.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 import java.io.IOException;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface UserMapper {
-    static UserDto fromDto(User user)throws IOException {
-        return UserDto.builder()
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .birthdate(user.getBirthdate())
-                .sexe(user.getSexe())
-                .email(user.getEmail())
-                .role(user.getRole())
-                .build();
-    }
 
-    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+    @Mapping(target = "films", ignore = true)
+    @Mapping(target = "rates", ignore = true)
+    UserDto userToUserDto(User user);
 
-    @Mapping(target = "id", source = "user.id")
-    UserDto toUserDto(User user)throws IOException;
+    User userDtoToUser(UserDto userDto);
 
-    User fromUserDto(UserDto userDto, Long id)throws IOException;
+    void updateUserFromDto(UserDto userDto, @MappingTarget User user);
+
 
 }

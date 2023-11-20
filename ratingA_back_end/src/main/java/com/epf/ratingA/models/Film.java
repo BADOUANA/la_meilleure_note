@@ -4,10 +4,7 @@ package com.epf.ratingA.models;
 import com.epf.ratingA.enumer.Category;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -17,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +27,8 @@ public class Film {
     private String outDate;
     @Column(name = "time")
     private int time;
+    @ElementCollection(targetClass = Category.class)
+    @Enumerated(EnumType.STRING)
     @Column(name = "category")
     private List<Category> category;
 
@@ -39,7 +39,7 @@ public class Film {
             inverseJoinColumns = @JoinColumn(name = "film_idFilm"))
     private List<User> user;*/
 
-    @OneToMany(mappedBy = "rate", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private List<Rate> rates;
 
     @OneToOne
@@ -48,4 +48,13 @@ public class Film {
     private Image image;
 
 
+    public Film (Film film){
+        this.setTitle(film.getTitle());
+        this.setAuthor(film.getTitle());
+        this.setRates(film.getRates());
+        this.setOutDate(film.getOutDate());
+        this.setCategory(film.getCategory());
+        this.setImage(film.getImage());
+
+    }
 }
