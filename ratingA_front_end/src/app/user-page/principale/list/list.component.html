@@ -1,0 +1,22 @@
+<tbody>
+    <tr *ngFor="let c of listfilm">
+        <div class="container-fluid Car">
+            <figure class="project_item">
+                <figcaption>
+                    <h3 class="project_kind">
+                        <td>{{c.titre}}</td>
+                        <td>{{c.autheur}}</td>
+                        <td>{{c.date_sortie}}</td>
+                        <td>{{c.categorie}}</td>
+                        <td>
+                            <img src="picture/{{c.image }}">
+                        </td>
+                    </h3>
+                </figcaption>
+                <a class=" project_link " (click)="GiveNoting(c) " href="/userpages/principale/note " target="_blank " style="color: #ae0580; ">
+
+                    <b>Poursuivre pour noter</b>
+                </a>
+            </figure>
+
+        </div>

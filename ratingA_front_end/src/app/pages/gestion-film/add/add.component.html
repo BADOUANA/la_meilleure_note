@@ -1,0 +1,50 @@
+<div class="mr-auto container-fluid p-2 bg-cyan fg-white" style="width: 950px">
+    <div class="row mt-2">
+        <div class="col-8 ">
+
+
+            <div class="row">
+                <div class="main-header">
+
+                </div>
+            </div>
+            <!-- 4-blocks row start -->
+            <div class="row dashboard-header">
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="mr-auto container-fluid p-2 bg-cyan fg-white" style="width: 1000px">
+
+                        <div class="bootstrap-table">
+                            <div class="row mt-2">
+                                <div class="col-8 ">
+                                    <div class="mr-auto container-fluid p-2 bg-cyan fg-white" style="width: 950px">
+                                        <div class="row mt-2">
+                                            <div class="col-8 ">
+                                                <h1>film </h1>
+
+                                            </div>
+                                        </div>
+                                        <form [formGroup]="filmForm" (ngSubmit)="submit()">
+                                            <div class="form-group">
+                                                <label for="film">titre</label>
+                                                <input formControlName="titre" type="text" id="film" class="form-control" placeholder="Saisir..">
+                                                <label for="film">autheur</label>
+                                                <input formControlName="autheur" type="text" id="film" class="form-control" placeholder="Saisir..">
+                                                <label for="film">date_sortie</label>
+                                                <input formControlName="date_sortie" type="text" id="film" class="form-control" placeholder="Saisir..">
+                                                <label for="film">categorie</label>
+                                                <input formControlName="categorie" type="text" id="film" class="form-control" placeholder="Saisir..">
+
+                                                <div>
+                                                    <label for="film">image</label>
+                                                    <div>
+                                                        <input type="file" name="img" id="film" class="form-control-file">
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+
+                                            <button class="btn btn-outline-primary mt-3 btn-sm "> Ajouter</button>
+                                        </form>

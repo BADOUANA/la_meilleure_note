@@ -1,0 +1,56 @@
+<table class="table-responsive table table-striped table table-bordered border-primary">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prenom</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Email</th>
+            <th scope="col">sexe</th>
+            <th scope="col">date naissance</th>
+            <th scope="col">Telephone</th>
+
+
+            <th>Action</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let c of listUsers">
+
+            <td>{{c.id}}</td>
+            <td>{{c.nom}}</td>
+            <td>{{c.prenom}}</td>
+            <td>{{c.adresse}}</td>
+            <td>{{c.email}}</td>
+            <td>{{c.sexe}}</td>
+            <td>{{c.date_naiss}}</td>
+            <td>{{c.telephone}}</td>
+
+            <td>
+
+                <div class="row">
+                    <div class="col">
+                        <button (click)="oneUpdate(c)" class=" btn btn-sm fa fa-edit btn-outline-info " href="/pages/Users/edit ">Update</button>
+                    </div>
+                    <div class=" col ">
+                        <button (click)="oneDelete(c.id) " class="btn-sm btn btn-sm fa fas fa-remove btn-outline-danger ">Delete</button>
+                    </div>
+
+                </div>
+
+            </td>
+
+
+
+        </tr>
+
+    </tbody>
+
+
+</table>
+<pagination-controls previousLabel="Precedent " nextLabel="Suivant " [responsive]="true " (pageChange)="hundlePageChange($event) ">
+
+</pagination-controls>
+<ul>
+    <li class="list-group-item " *ngFor="let c of listUsers| paginate:{ itemsPerPage:PAGESIZE, currentPage:PAGE, totalItems : count } ; let i=index " [class.active]="i==CURRENTINDEX ">
+
+    </li>
