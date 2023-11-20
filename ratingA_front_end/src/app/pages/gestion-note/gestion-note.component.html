@@ -1,0 +1,17 @@
+<div class="mr-auto container-fluid p-2 bg-cyan fg-white" style="width: 950px">
+    <div class="row mt-2">
+        <div class="col-8 ">
+
+            <div class="bootstrap-table">
+                <div class="row mt-2">
+                    <div class="col-8 ">
+                        <h1>Notes attribué par les utlisateurs</h1>
+
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col--8">
+                        <app-list (noteEmitted)="get($event)"> </app-list>
+                    </div>
+
+                </div>

@@ -1,0 +1,43 @@
+<div class="col-12 col-lg-9">
+    <!-- Comment Area Start -->
+    <div class="post-a-comment-area mb-100 clearfix">
+        <h4 class="mb-50">Veuillez remplir ces informations !</h4>
+
+        <!-- Reply Form -->
+        <div class="contact-form-area">
+            <form [formGroup]="noteForm" (ngSubmit)="submit()">
+                <div class="form-group">
+                    <div class="col-12 col-lg-6">
+                        <div class="col-12">
+                            <label for="user">user</label>
+                            <select formControlName="user_id" class="form-control" name="user" id="user">
+                  <option *ngFor="let d of listUser" value="{{d?.id}}">{{d?.nom_user}}</option>
+                </select>
+                        </div>
+                        v class="col-12 col-lg-6">
+                        <div class="col-12">
+                            <label for="user">user</label>
+                            <select formControlName="user_id" class="form-control" name="user" id="user">
+                  <option *ngFor="let d of listUser" value="{{d?.id}}">{{d?.prenom_user}}</option>
+                </select>
+                        </div>
+                        <div class="col-12">
+                            <label for="film">film</label>
+                            <select formControlName="film_id" class="form-control" name="film" id="film">
+                  <option *ngFor="let s of listFilm" value="{{s?.id}}">{{s?.nom_film}}</option>
+                  </select>
+                        </div>
+                        <div class="col-12">
+                            <label for="note"> note</label>
+                            <input formControlName="note" type="text" id="note" class="form-control" placeholder="Saisir..">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <button class="btn credit-btn mt-30" type="submit">Envoyer</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

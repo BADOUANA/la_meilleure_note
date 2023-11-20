@@ -1,0 +1,17 @@
+<h5>Modification des informations des films correspondantes</h5>
+<form [formGroup]="filmForm" (ngSubmit)="submit()">
+    <div class="form-group">
+        <label for="film">titre</label>
+        <input formControlName="titre" type="text" id="film" class="form-control" placeholder="Saisir..">
+        <label for="film">autheur</label>
+        <input formControlName="autheur" type="text" id="film" class="form-control" placeholder="Saisir..">
+        <label for="film">date_sortie</label>
+        <input formControlName="date_sortie" type="text" id="film" class="form-control" placeholder="Saisir..">
+        <label for="film">categorie</label>
+        <input formControlName="categorie" type="text" id="film" class="form-control" placeholder="Saisir..">
+
+    </div>
+
+
+    <button class="btn btn-outline-primary mt-3 btn-sm "> Ajouter</button>
+</form>

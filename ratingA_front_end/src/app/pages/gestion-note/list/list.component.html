@@ -1,0 +1,32 @@
+<table class="table-responsive table table-striped ">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prenom</th>
+            <th scope="col">Film</th>
+            <th scope="col">Note</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let c of listnote">
+
+            <td>{{c.id}}</td>
+            <td>{{c.user.nom}}</td>
+            <td>{{c.user.prenom}}</td>
+            <td>{{c.film.titre}}</td>
+            <td>{{c.note}}</td>
+        </tr>
+
+    </tbody>
+
+
+</table>
+<pagination-controls previousLabel="Precedent " nextLabel="Suivant " [responsive]="true " (pageChange)="hundlePageChange($event) ">
+
+</pagination-controls>
+<ul>
+    <li class="list-group-item " *ngFor="let c of listnote| paginate:{ itemsPerPage:PAGESIZE, currentPage:PAGE, totalItems : count } ; let i=index " [class.active]="i==CURRENTINDEX ">
+
+    </li>
+
+</ul>

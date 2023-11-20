@@ -1,0 +1,25 @@
+<div class="mr-auto container-fluid p-2 bg-cyan fg-white" style="width: 950px">
+    <div class="row mt-2">
+        <div class="col-8 ">
+
+            <div class="bootstrap-table">
+                <div class="row mt-2">
+                    <div class="col-8 ">
+                        <h1>Liste des film </h1>
+
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col--8">
+                        <app-list (filmEmitted)="get($event)"> </app-list>
+                    </div>
+                    <div class="col-4 ">
+                        <app-edit [film]="filmshared" *ngIf="isUpdating "> </app-edit>
+                    </div>
+
+                </div>
+
+                <a class="btn btn-warning" href="/pages/film/add ">
+                    <i class="bi bi-grid "></i>
+                    <span>Ajouter un Film </span>
+                </a>
