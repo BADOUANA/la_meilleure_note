@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("*")
-@RequestMapping("/users")
+@CrossOrigin
+@RequestMapping("users")
 @RestController
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+
 
     @GetMapping("/list")
     public ResponseEntity<List<User>> getAllUsers() {
@@ -24,9 +25,11 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/films")
-    public ResponseEntity<List<Film>> getFilmsByUserId(@PathVariable Long id) {
-        List<Film> films = (id != null) ? userService.findAllFilmsByUserId(id) : null;
+    @CrossOrigin("*")
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Film>> getUserById(@PathVariable Long id) {
+        List<Film> films = (id != null) ? userService.findByUserId(id) : null;
         return new ResponseEntity<>(films, HttpStatus.OK);
     }
 

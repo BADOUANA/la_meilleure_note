@@ -1,34 +1,35 @@
 package com.epf.ratingA.services;
 
 import com.epf.ratingA.dao.FilmDao;
+import com.epf.ratingA.dao.UserDao;
 import com.epf.ratingA.dto.FilmDto;
 import com.epf.ratingA.exceptions.FilmException;
-import com.epf.ratingA.interfaces.IFilmService;
 import com.epf.ratingA.mappers.FilmMapper;
+import com.epf.ratingA.mappers.UserMapper;
 import com.epf.ratingA.models.Film;
 import com.epf.ratingA.models.Image;
 import com.epf.ratingA.models.Rate;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-@Transactional
-@RequiredArgsConstructor
-public class FilmService implements IFilmService {
+public class FilmService  {
     private final FilmDao filmDao;
     private final FilmMapper filmMapper;
+    @Autowired
+    public FilmService(FilmDao filmDao, FilmMapper filmMapper) {
+        this.filmDao = filmDao;
+        this.filmMapper = filmMapper;
+    }
 
-    @Override
     public List<Film> findAll(){return filmDao.findAll();}
-    @Override
     public List<Film> findAllBestFilmByRates(){return filmDao.getBestFilmByRates();}
-    @Override
     public List<Rate> findRatesByFilmId(Long id){return filmDao.getAllRatesFromFilm(id);}
-    @Override
     public Film findFilmByTitle(String title){return filmDao.findFilmByTitle(title);}
 
     /*@Override
@@ -52,7 +53,6 @@ public class FilmService implements IFilmService {
             }
         }
     }*/
-    @Override
     public FilmDto createFilm(FilmDto filmDto) throws FilmException {
         try {
 
@@ -64,7 +64,6 @@ public class FilmService implements IFilmService {
             throw new FilmException();
         }
     }
-    @Override
     public void updateFilm(FilmDto filmDto, Long filmId) throws FilmException{
         try {
             Film existingFilm = filmDao.findById(filmId)
@@ -78,11 +77,9 @@ public class FilmService implements IFilmService {
         }
     }
 
-    @Override
     public void deleteFilm(Long id){filmDao.deleteById(id);}
 
 
-    @Override
     public List<Film> searchFilmsByTitle(String searchTerm) {
         return filmDao.searchByTitle(searchTerm);
     }

@@ -6,7 +6,6 @@ import com.epf.ratingA.models.User;
 import com.epf.ratingA.enumer.Role;
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 public class TestData {
     public static User createSampleUser(Long id, String firstName, String lastName, Role role, String email, Instant birthdate, String sexe, String password) {
@@ -17,7 +16,7 @@ public class TestData {
         user.setRole(role);
         user.setEmail(email);
         user.setBirthdate(birthdate);
-        user.setSexe(sexe);
+        user.setSex(sexe);
         user.setPassword(password);
         // Ajoute d'autres propriétés de l'utilisateur si nécessaire
         return user;

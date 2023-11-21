@@ -4,7 +4,6 @@ import com.epf.ratingA.enumer.Role;
 import com.epf.ratingA.models.Film;
 import com.epf.ratingA.models.Rate;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Column;
 import lombok.*;
 
 import java.time.Instant;
@@ -23,7 +22,7 @@ public class UserDto {
     private Role role;
     private String email;
     private Instant birthdate;
-    private String sexe;
+    private String sex;
     private String password;
     private List<Film> films;
     private List<Rate> rates;

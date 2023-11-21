@@ -2,7 +2,6 @@ package com.epf.ratingA.services;
 
 import com.epf.ratingA.dao.UserDao;
 import com.epf.ratingA.dto.UserDto;
-import com.epf.ratingA.exceptions.UserException;
 import com.epf.ratingA.mappers.UserMapper;
 import com.epf.ratingA.models.Film;
 import com.epf.ratingA.models.User;
@@ -10,14 +9,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,7 +56,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void testFindAllFilmsByUserName() {
+    void testFindByUserName() {
         // Arrange
         String firstName = "John";
         String lastName = "Doe";
@@ -69,133 +66,41 @@ public class UserServiceTest {
         user.setFirstName(firstName);
         user.setLastName(lastName);
 
-        List<Film> films = Arrays.asList(new Film(), new Film());
 
         when(userDao.findUserByFirstNameAndLastName(firstName, lastName)).thenReturn(user);
-        when(userDao.getAllFilmsFromUser(user.getId())).thenReturn(films);
 
         // Act
-        List<Film> result = userService.findAllFilmsByUserName(firstName, lastName);
+        Long result = userService.findByUserName(firstName, lastName);
 
         // Assert
-        assertEquals(films, result);
-        verify(userDao, times(1)).findUserByFirstNameAndLastName(firstName, lastName);
-        verify(userDao, times(1)).getAllFilmsFromUser(user.getId());
-    }
+        assertEquals(user.getId(), result);
+        verify(userDao, times(1)).findUserByFirstNameAndLastName(firstName, lastName);}
 
     @Test
-    void testFindAllFilmsByUserId() {
+    void testCreateUser() {
         // Arrange
-        Long userId = 1L;
-        User user = new User();
-        user.setId(userId);
+        UserDto newUserDto = new UserDto();
+        newUserDto.setId(1L);
+        newUserDto.setFirstName("John");
+        newUserDto.setLastName("Doe");
+        // Set other properties as needed
 
-        Film film1 = new Film();
-        film1.setId(1L);
-        film1.setTitle("Film 1");
+        User newUser = new User();
+        newUser.setId(1L);
+        // Set other properties as needed
 
-        Film film2 = new Film();
-        film2.setId(2L);
-        film2.setTitle("Film 2");
-
-        List<Film> films = Arrays.asList(film1, film2);
-
-        when(userDao.findById(userId)).thenReturn(Optional.of(user));
-        when(userDao.getAllFilmsFromUser(userId)).thenReturn(films);
+        when(userMapper.userDtoToUser(newUserDto)).thenReturn(newUser);
+        when(userDao.save(newUser)).thenReturn(newUser);
+        when(userMapper.userToUserDto(newUser)).thenReturn(newUserDto);
 
         // Act
-        List<Film> result = userService.findAllFilmsByUserId(userId);
+        UserDto result = userService.createUser(newUserDto);
 
         // Assert
-        assertEquals(films, result);
-        verify(userDao, times(1)).findById(userId);
-        verify(userDao, times(1)).getAllFilmsFromUser(userId);
-    }
-  /*  @Test
-    void testGetUserById() {
-        // Arrange
-        Long userId = 1L;
-        User user = new User();
-        user.setId(userId);
-        UserDto userDto = new UserDto();
-        userDto.setId(userId);
-
-        when(userDao.findById(userId)).thenReturn(Optional.of(user));
-        when(userMapper.userToUserDto(user)).thenReturn(userDto);
-
-        // Act
-        UserDto result = userService.getUserById(userId);
-
-        // Assert
-        assertEquals(userId, result.getId());
-        verify(userDao, times(1)).findById(userId);
-        verify(userMapper, times(1)).userToUserDto(user);
-    }
-
-    @Test
-    void testGetUserByIdNotFound() {
-        // Arrange
-        Long userId = 1L;
-
-        when(userDao.findById(userId)).thenReturn(Optional.empty());
-
-        // Act & Assert
-        assertThrows(UserException.class, () -> userService.getUserById(userId));
-        verify(userDao, times(1)).findById(userId);
-        verify(userMapper, never()).userToUserDto(any());
-    }
-
-    @Test
-    void testFindAllFilmsByUserId() {
-        // Arrange
-        Long userId = 1L;
-        User user = new User();
-        user.setId(userId);
-        Film film = new Film();
-        List<Film> films = Collections.singletonList(film);
-
-        when(userDao.findById(userId)).thenReturn(Optional.of(user));
-        when(userDao.getAllFilmsFromUser(userId)).thenReturn(films);
-
-        // Act
-        List<Film> result = userService.findAllFilmsByUserId(userId);
-
-        // Assert
-        assertEquals(films, result);
-        verify(userDao, times(1)).findById(userId);
-        verify(userDao, times(1)).getAllFilmsFromUser(userId);
-    }
-
-    @Test
-    void testFindAllFilmsByUserIdNotFound() {
-        // Arrange
-        Long userId = 1L;
-
-        when(userDao.findById(userId)).thenReturn(Optional.empty());
-
-        // Act & Assert
-        assertThrows(UserException.class, () -> userService.findAllFilmsByUserId(userId));
-        verify(userDao, times(1)).findById(userId);
-        verify(userDao, never()).getAllFilmsFromUser(any());
-    }
-
-
-
-    @Test
-    public void testCreateUser() {
-        // Mocking the behavior of the userDao.save method
-        when(userDao.save(any())).thenReturn(new User());
-
-        // Mocking the behavior of the userMapper.userToUserDto method
-        when(userMapper.userToUserDto(any())).thenReturn(new UserDto());
-
-        // Calling the method to be tested
-        UserDto userDto = userService.createUser(new UserDto());
-
-        // Assertions
-        assertNotNull(userDto);
-        verify(userDao, times(1)).save(any());
-        verify(userMapper, times(1)).userToUserDto(any());
+        assertEquals(newUserDto, result);
+        verify(userMapper, times(1)).userDtoToUser(newUserDto);
+        verify(userDao, times(1)).save(newUser);
+        verify(userMapper, times(1)).userToUserDto(newUser);
     }
 
     @Test
@@ -213,17 +118,8 @@ public class UserServiceTest {
         // Set other properties as needed
 
         when(userDao.findById(userId)).thenReturn(Optional.of(existingUser));
-        when(userMapper.updateUserFromDto(updatedUserDto, existingUser)).thenAnswer(invocation -> {
-            UserDto dtoArg = invocation.getArgument(0);
-            User userArg = invocation.getArgument(1);
-
-            // Custom logic for updating the user from the DTO
-            userArg.setFirstName(dtoArg.getFirstName());
-            userArg.setLastName(dtoArg.getLastName());
-            // Update other properties as needed
-
-            return null; // The updateUserFromDto method is void
-        });
+        doNothing().when(userMapper).updateUserFromDto(updatedUserDto, existingUser);
+        when(userDao.save(existingUser)).thenReturn(existingUser);
 
         // Act
         UserDto result = userService.updateUser(updatedUserDto, userId);
@@ -236,21 +132,19 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testFindAllFilmsByUserName_Success() {
-        // Mocking the behavior of the userDao.findUserByFirstNameAndLastName method
-        when(userDao.findUserByFirstNameAndLastName(any(), any())).thenReturn(new User());
+    void testDeleteById() {
+        // Arrange
+        Long userId = 1L;
+        User existingUser = new User();
+        existingUser.setId(userId);
+        // Set other properties as needed
 
-        // Mocking the behavior of the userDao.getAllFilmsFromUser method
-        when(userDao.getAllFilmsFromUser(anyLong())).thenReturn(Collections.emptyList());
+        when(userDao.findById(userId)).thenReturn(Optional.of(existingUser));
 
-        // Calling the method to be tested
-        List<Film> films = userService.findAllFilmsByUserName("John", "Doe");
+        // Act
+        userService.deleteById(userId);
 
-        // Assertions
-        assertNotNull(films);
-        assertTrue(films.isEmpty());
-        verify(userDao, times(1)).findUserByFirstNameAndLastName("John", "Doe");
-        verify(userDao, times(1)).getAllFilmsFromUser(anyLong());
-    }*/
-
+        // Assert
+        verify(userDao, times(1)).deleteById(userId);
+    }
 }

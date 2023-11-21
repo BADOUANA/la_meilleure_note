@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
 })
 export class FilmService {
 
-readonly API_URL = "http://localhost:8080"
-readonly ENDPOINT_film ='/film';
-readonly ENDPOINT_Onefilm='/film/{id}';
-readonly ENDPOINT_OneDelete ='/film/delete/';
-readonly ENDPOINT_OneUpd ='/film/update/';
-readonly ENDPOINT_Paging ='/film/paging';
+readonly API_URL = "http://localhost:8080/"
+readonly ENDPOINT_film ='films';
+readonly ENDPOINT_Onefilm='/films/{id}';
+readonly ENDPOINT_OneDelete ='/films/delete/';
+readonly ENDPOINT_OneUpd ='/films/update/';
+readonly ENDPOINT_Paging ='films';
 
 
   constructor(private httpClient: HttpClient) { }

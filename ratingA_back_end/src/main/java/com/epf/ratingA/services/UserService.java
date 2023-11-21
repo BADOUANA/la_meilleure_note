@@ -34,38 +34,28 @@ public class UserService {
         return userOptional.map(userMapper::userToUserDto).orElseThrow(()->
                 new UserException("User not found"));
     }
-    public List<Film> findAllFilmsByUserId(Long userId) throws UserException{
+    public List<Film> findByUserId(Long userId) throws UserException{
         try {
             User user = userDao.findById(userId).orElseThrow(() -> new NoSuchElementException("User not found"));
 
-            return userDao.getAllFilmsFromUser(user.getId());
+            return userDao.getAllRatesFromUser(user.getId());
         }catch (Exception e){
             e.printStackTrace();
             throw new UserException("Problem when acces to get list");
         }
     }
 
-    public List<Film> findAllFilmsByUserName(String firstName, String lastName){
+    public Long findByUserName(String firstName, String lastName){
         try {
             User user = userDao.findUserByFirstNameAndLastName(firstName, lastName);
-
-            if (user == null) {
-                throw new UserException("User not found with name: " + firstName + " " + lastName);
-            }
-
-            return userDao.getAllFilmsFromUser(user.getId());
-        } catch (DataAccessException e) {
-            // Handle database-related exceptions
-            throw new RuntimeException("Error accessing data", e);
-        } catch (Exception e) {
+            return user.getId();
+        }catch (Exception e) {
             // Handle other unexpected exceptions
-            throw new RuntimeException("An unexpected error occurred", e);
+            throw new UserException("User not found with name: " + firstName + " " + lastName);
         }
     }
-    @Transactional
     public void deleteById(Long userId){userDao.deleteById(userId);}
 
-    @Transactional
     public UserDto createUser(UserDto userDto){
         try {
             User user = userMapper.userDtoToUser(userDto);
@@ -77,7 +67,6 @@ public class UserService {
         // return  (user != null) ? UserMapper.INSTANCE.toUserDto(user) : null;
     }
 
-    @Transactional
     public UserDto updateUser(UserDto userDto, Long userId){
         User user = userDao.findById(userId).orElseThrow(()->new NoSuchElementException("User doesn't exist"));
 

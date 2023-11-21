@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @CrossOrigin
 @RequestMapping("rates")
 @RestController
@@ -17,9 +19,8 @@ public class RateController {
     private final RateService rateService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Rate> getRateById(@PathVariable Long id) {
-        Rate rate = rateService.findById(id);
-        return new ResponseEntity<>(rate, HttpStatus.OK);
+    public Optional<Rate> getRateById(@PathVariable Long id) {
+        return rateService.findById(id);
     }
 
     @DeleteMapping("/{id}")

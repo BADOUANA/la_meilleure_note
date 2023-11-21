@@ -31,7 +31,7 @@ public class User {
     @Column(name = "birthdate")
     private Instant birthdate;
     @Column(name = "sex")
-    private String sexe;
+    private String sex;
     @Column(name = "password")
     private String password;
 

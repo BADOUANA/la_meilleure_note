@@ -15,7 +15,7 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "bytea")
+    @Column(name = "bytes")
     @Lob
     private byte[] bytes;
     @Column(name = "title")

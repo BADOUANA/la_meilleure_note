@@ -1,0 +1,5 @@
+package com.epf.back_end.enumer;
+
+public enum Category {
+    ACTION,DRAMA,COMEDY,ROMANCE,THRILLER,MYSTERY,SCIENCE_FICTION,ADVENTURE,HORROR,CRIME
+}

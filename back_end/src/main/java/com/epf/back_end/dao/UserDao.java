@@ -1,0 +1,18 @@
+package com.epf.back_end.dao;
+
+import com.epf.back_end.models.Rate;
+import com.epf.back_end.models.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface UserDao extends JpaRepository<User,Long> {
+    User findUserByFirstNameAndLastName(String firstName, String lastName);
+
+    @Query("SELECT r FROM Rate r WHERE r.user.id= :user_id")
+    List<Rate> getAllRatesFromUser(@Param("user_id")Long userId);
+}

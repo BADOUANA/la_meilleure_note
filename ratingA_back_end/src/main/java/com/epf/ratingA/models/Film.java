@@ -27,7 +27,6 @@ public class Film {
     private String outDate;
     @Column(name = "time")
     private int time;
-    @ElementCollection(targetClass = Category.class)
     @Enumerated(EnumType.STRING)
     @Column(name = "category")
     private List<Category> category;
@@ -48,13 +47,5 @@ public class Film {
     private Image image;
 
 
-    public Film (Film film){
-        this.setTitle(film.getTitle());
-        this.setAuthor(film.getTitle());
-        this.setRates(film.getRates());
-        this.setOutDate(film.getOutDate());
-        this.setCategory(film.getCategory());
-        this.setImage(film.getImage());
 
-    }
 }

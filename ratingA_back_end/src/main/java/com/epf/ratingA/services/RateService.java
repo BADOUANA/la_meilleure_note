@@ -23,7 +23,7 @@ public class RateService {
     private final FilmDao filmDao;
     private final UserDao userDao;
 
-    public Rate findById(Long id){return rateDao.findById(id).get();}
+    public Optional<Rate> findById(Long id){return rateDao.findById(id);}
 
     public Long addRate(RateDto rateDto, Long filmId, Long userId){
         Optional<Film> film = filmDao.findById(filmId);

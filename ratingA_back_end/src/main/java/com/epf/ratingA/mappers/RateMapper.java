@@ -12,7 +12,7 @@ import java.io.IOException;
 public interface RateMapper {
     @Mapping(target = "rate.id", source = "user.id")
     @Mapping(target = "rate.id", source = "film.id")
-    public static RateDto fromDto(Rate rate)throws IOException {
+     static RateDto fromDto(Rate rate)throws IOException {
         return RateDto.builder()
                 .note(rate.getNote())
                 .summary(rate.getSummary())

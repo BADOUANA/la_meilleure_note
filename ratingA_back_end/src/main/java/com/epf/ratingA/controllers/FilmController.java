@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("localhost:8081")
+@CrossOrigin
 @RequestMapping("/films")
 @RestController
 @RequiredArgsConstructor
 public class FilmController {
-    private FilmService filmService;
-    @GetMapping
-    public ResponseEntity<List<Film>> getAllFilms() {
-        List<Film> films = filmService.findAll();
-        return new ResponseEntity<>(films, HttpStatus.OK);
+    private final FilmService filmService;
+    @GetMapping("")
+    public List<Film> getAllFilms() {
+
+        return filmService.findAll();
     }
 
     @GetMapping("/best")
@@ -36,7 +36,7 @@ public class FilmController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> addFilm(@RequestBody FilmDto filmDto) throws Exception {
+    public ResponseEntity<Void> addFilm(@RequestBody FilmDto filmDto) {
         filmService.createFilm(filmDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
