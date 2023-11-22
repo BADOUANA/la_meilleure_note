@@ -4,17 +4,15 @@ import com.epf.back_end.enumer.Role;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -41,10 +39,5 @@ public class User {
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy="user")
     private List<Rate> rates = new ArrayList<>();
-
-    public User() {
-
-    }
-
 
 }

@@ -1,16 +1,20 @@
 package com.epf.back_end.controllers;
 
 import com.epf.back_end.dao.UserDao;
+import com.epf.back_end.dto.UserDTO;
 import com.epf.back_end.exceptions.ResourceNotFoundException;
+import com.epf.back_end.interfaces.impl.UserServiceImpl;
 import com.epf.back_end.models.Rate;
 import com.epf.back_end.models.User;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -18,46 +22,56 @@ import java.util.Map;
 @AllArgsConstructor
 public class UserController {
     private final UserDao userDao;
+    private final UserServiceImpl userServiceImpl;
 
     @GetMapping("/list")
     public List<User> getUsers(){
         return (List<User>) userDao.findAll();
     }
 
-    @PostMapping
-    void addUser(@RequestBody User user){
-        userDao.save(user);
-    }
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long id)
-            throws ResourceNotFoundException {
-        User user = userDao.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
-        return ResponseEntity.ok().body(user);
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+        try {
+            UserDTO userDTO = userServiceImpl.getUserById(id);
+            return new ResponseEntity<>(userDTO, HttpStatus.OK);
+        } catch (ResourceNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
+    @GetMapping
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        try {
+            List<UserDTO> userDTOs = userServiceImpl.getAllUsers();
+            return new ResponseEntity<>(userDTOs, HttpStatus.OK);
+        } catch (ResourceNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
+        try {
+            UserDTO createdUser = userServiceImpl.createUser(userDTO);
+            return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long id,
-                                                   @RequestBody User user) throws ResourceNotFoundException {
-        User existUser = userDao.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
-
-        existUser.setEmail(user.getEmail());
-        existUser.setLastName(user.getLastName());
-        existUser.setFirstName(user.getFirstName());
-        final User updatedUser = userDao.save(existUser);
-        return ResponseEntity.ok(updatedUser);
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
+        try {
+            UserDTO updatedUser = userServiceImpl.updateUser(id, userDTO);
+            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+        } catch (ResourceNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    @DeleteMapping("/user/{id}")
-    public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") Long id)
-            throws ResourceNotFoundException {
-        User user = userDao.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
-
-        userDao.delete(user);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return response;
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userServiceImpl.deleteUser(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/{id}/myRates")
