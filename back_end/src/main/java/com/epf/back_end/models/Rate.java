@@ -1,5 +1,6 @@
 package com.epf.back_end.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +14,7 @@ import lombok.*;
 public class Rate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idRate;
+    private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "note")
@@ -25,6 +26,7 @@ public class Rate {
 
     @ManyToOne
     @JoinColumn(name = "film_id")
+    @JsonIgnore
     private Film film;
 
     @ManyToOne

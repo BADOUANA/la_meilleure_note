@@ -2,6 +2,7 @@ package com.epf.back_end.models;
 
 
 import com.epf.back_end.enumer.Category;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,11 +30,13 @@ public class Film {
     @Column(name = "time")
     private int time;
     @Enumerated(EnumType.STRING)
-    @Column(name = "categories")
+    @Column(name = "category")
     private List<Category> categories;
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy="film")
+    @JsonIgnore
     private List<Rate> rates = new ArrayList<>();
+
 
 
 }

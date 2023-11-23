@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class RateMapper {
     public static RateDTO toDTO(Rate rate) {
         return RateDTO.builder()
-                .idRate(rate.getIdRate())
+                .idRate(rate.getId())
                 .name(rate.getName())
                 .note(rate.getNote())
                 .summary(rate.getSummary())
@@ -26,7 +26,7 @@ public class RateMapper {
 
     public static Rate toEntity(RateDTO rateDTO) {
         return Rate.builder()
-                .idRate(rateDTO.getIdRate())
+                .id(rateDTO.getIdRate())
                 .name(rateDTO.getName())
                 .note(rateDTO.getNote())
                 .summary(rateDTO.getSummary())
