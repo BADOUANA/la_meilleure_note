@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", implementationName = "FilmMapperImpl")
 public interface FilmMapper {
     /*public static FilmDTO toDTO(Film film) {
         return FilmDTO.builder()
@@ -36,4 +36,9 @@ public interface FilmMapper {
     public static List<Film> toEntityList(List<FilmDTO> filmDTOS) {
         return filmDTOS.stream().map(FilmMapper::toEntity).collect(Collectors.toList());
     }*/
+    FilmDTO filmToFilmDTO(Film film);
+    Film filmDTOToFilm(FilmDTO filmDTO);
+
+    List<FilmDTO> filmsToFilmDTOs(List<Film> films);
+    List<Film> filmDTOsToFilms(List<FilmDTO> filmDTOs);
 }

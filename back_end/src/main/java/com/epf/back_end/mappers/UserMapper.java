@@ -5,11 +5,12 @@ import com.epf.back_end.models.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
 
-@Mapper
+@Mapper(componentModel = "spring", implementationName = "UserMapperImpl")
 public interface UserMapper {
     /*public static UserDTO toDTO(User user) {
         return UserDTO.builder()
@@ -39,6 +40,8 @@ public interface UserMapper {
     public static List<User> toEntityList(List<UserDTO> userDTOS) {
         return userDTOS.stream().map(UserMapper::toEntity).collect(Collectors.toList());
     }*/
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+
 
     @Mapping(target = "rates", ignore = true)
     UserDTO userToUserDTO(User user);
