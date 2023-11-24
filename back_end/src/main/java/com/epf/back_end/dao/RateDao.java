@@ -12,4 +12,5 @@ public interface RateDao extends JpaRepository<Rate,Long> {
     @Query("SELECT r FROM Rate r WHERE r.note >= 0.8")
     List<Rate> getBestRates();
 
+
 }

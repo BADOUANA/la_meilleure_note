@@ -1,7 +1,8 @@
 package com.epf.back_end.controllers;
 
 import com.epf.back_end.dao.UserDao;
-import com.epf.back_end.dto.UserDTO;
+import com.epf.back_end.dto.request.UserDTORequest;
+import com.epf.back_end.dto.response.UserDTO;
 import com.epf.back_end.exceptions.ResourceNotFoundException;
 import com.epf.back_end.interfaces.impl.UserServiceImpl;
 import com.epf.back_end.models.Rate;
@@ -11,10 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -49,9 +47,9 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTORequest userDTORequest) {
         try {
-            UserDTO createdUser = userServiceImpl.createUser(userDTO);
+            UserDTO createdUser = userServiceImpl.createUser(userDTORequest);
             return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -59,9 +57,9 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTORequest userDTORequest) {
         try {
-            UserDTO updatedUser = userServiceImpl.updateUser(id, userDTO);
+            UserDTO updatedUser = userServiceImpl.updateUser(id, userDTORequest);
             return new ResponseEntity<>(updatedUser, HttpStatus.OK);
         } catch (ResourceNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

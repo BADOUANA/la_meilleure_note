@@ -3,6 +3,7 @@ package com.epf.back_end.mappers;
 import com.epf.back_end.dto.FilmDTO;
 import com.epf.back_end.models.Film;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,7 +37,11 @@ public interface FilmMapper {
     public static List<Film> toEntityList(List<FilmDTO> filmDTOS) {
         return filmDTOS.stream().map(FilmMapper::toEntity).collect(Collectors.toList());
     }*/
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "rates", ignore = true)
     FilmDTO filmToFilmDTO(Film film);
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "rates", ignore = true)
     Film filmDTOToFilm(FilmDTO filmDTO);
 
     List<FilmDTO> filmsToFilmDTOs(List<Film> films);

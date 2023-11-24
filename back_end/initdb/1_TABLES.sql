@@ -1,7 +1,7 @@
 CREATE TABLE images (
                         id SERIAL PRIMARY KEY,
-                        bytes BYTEA,
-                        title TEXT
+                        title TEXT,
+                        image_data OID
 );
 
 
@@ -36,3 +36,4 @@ CREATE TABLE rates (
                        film_id INT REFERENCES films (id),
                        user_id INT REFERENCES users (id)
 );
+

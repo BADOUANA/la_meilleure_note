@@ -1,4 +1,4 @@
-package com.epf.back_end.dto;
+package com.epf.back_end.dto.request;
 
 import com.epf.back_end.enumer.Role;
 import lombok.Builder;
@@ -6,13 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.Instant;
-import java.util.List;
 
 @Getter
 @Setter
 @Builder
-public class UserDTO {
-    private long id;
+public class UserDTORequest {
     private String firstName;
     private String lastName;
     private String email;
@@ -22,6 +20,4 @@ public class UserDTO {
 
     // Assume this field is not included in the DTO to enhance security
     private String password;
-
-    private List<RateDTO> rates;
 }

@@ -1,6 +1,5 @@
 package com.epf.back_end.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,9 +14,9 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "bytes")
+    @Column(name = "image_data")
     @Lob
-    private byte[] bytes;
+    private byte[] image_data;
     @Column(name = "title")
     private String title;
 

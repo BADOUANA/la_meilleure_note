@@ -51,7 +51,7 @@ public class FilmController {
     }
 
     @DeleteMapping("/film/{id}")
-    public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") Long id)
+    public Map<String, Boolean> deleteFilm(@PathVariable(value = "id") Long id)
             throws ResourceNotFoundException {
         Film film = filmDao.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Film not found for this id :: " + id));

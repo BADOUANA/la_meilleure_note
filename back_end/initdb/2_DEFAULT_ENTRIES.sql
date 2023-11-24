@@ -1,4 +1,4 @@
-INSERT INTO images (id, title, bytes)
+INSERT INTO images (id, title, image_data)
 VALUES
     (1, 'Image 1', NULL),
     (2, 'Image 2', NULL),

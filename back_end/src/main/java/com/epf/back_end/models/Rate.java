@@ -26,7 +26,6 @@ public class Rate {
 
     @ManyToOne
     @JoinColumn(name = "film_id")
-    @JsonIgnore
     private Film film;
 
     @ManyToOne

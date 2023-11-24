@@ -55,7 +55,7 @@ public class RateController {
     }
 
     @DeleteMapping("/rate/{id}")
-    public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") Long id)
+    public Map<String, Boolean> deleteRate(@PathVariable(value = "id") Long id)
             throws ResourceNotFoundException {
         Rate rate = rateDao.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Rate not found for this id :: " + id));

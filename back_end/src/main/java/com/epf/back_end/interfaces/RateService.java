@@ -9,9 +9,12 @@ public interface RateService {
 
     List<RateDTO> getAllRates();
 
-    RateDTO createRate(RateDTO rateDTO);
+    Long createRate(RateDTO rateDTO,Long filmId, Long userId);
 
     RateDTO updateRate(Long rateId, RateDTO rateDTO);
 
     void deleteRate(Long rateId);
+
+    List<RateDTO> getBestRates();
+
 }
