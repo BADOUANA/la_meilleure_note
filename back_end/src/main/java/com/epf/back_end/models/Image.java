@@ -19,5 +19,15 @@ public class Image {
     private byte[] image_data;
     @Column(name = "title")
     private String title;
+    @Column(name = "type")
+    private String type;
 
+    @OneToOne(mappedBy = "image")
+    private User user;
+
+    public Image(String title, String type, byte[] bytes) {
+        this.title = title;
+        this.type = type;
+        this.image_data = bytes;
+    }
 }
