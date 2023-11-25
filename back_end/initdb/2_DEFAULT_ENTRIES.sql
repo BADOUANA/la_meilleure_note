@@ -1,10 +1,10 @@
-INSERT INTO images (id, title, image_data)
+INSERT INTO images (id, title,type, image_data)
 VALUES
-    (1, 'Image 1', NULL),
-    (2, 'Image 2', NULL),
-    (3, 'Image 3', NULL),
-    (4, 'Image 4', NULL),
-    (5, 'Image 5', NULL);
+    (1, 'Image 1','png', NULL),
+    (2, 'Image 2','png', NULL),
+    (3, 'Image 3','jpeg', NULL),
+    (4, 'Image 4','png', NULL),
+    (5, 'Image 5','jpeg', NULL);
 
 
 INSERT INTO users (id, first_name, last_name, birthdate, role, email, sex, password, image_id)
