@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin
+@CrossOrigin("http://localhost:4200/")
 @RequestMapping("/api/films")
 @AllArgsConstructor
 public class FilmController {
@@ -28,7 +28,7 @@ public class FilmController {
     private final FilmDao filmDao;
     private final FilmService filmService;
 
-    @GetMapping
+    @GetMapping("/list")
     public ResponseEntity<List<FilmDTO>> getAllFilms() {
         try {
             List<FilmDTO> filmDTOs = filmService.getAllFilms();
@@ -56,7 +56,7 @@ public class FilmController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<FilmDTO> updateFilm(@PathVariable(value = "id") Long id, @RequestBody FilmDTORequest filmDTORequest) {
         try {
             FilmDTO updatedFilm = filmService.updateFilm(id, filmDTORequest);
@@ -66,7 +66,7 @@ public class FilmController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         filmService.deleteFilm(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

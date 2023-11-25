@@ -1,20 +1,21 @@
 <h5>Modification des informations des utilisateurs correspondantes</h5>
 <form [formGroup]="usersForm" (ngSubmit)="submit()">
     <div class="form-group">
-        <label for="users">Adresse</label>
-        <input [ngClass]="{'is-invalid': submitted && f['adresse'].errors}" formControlName="adresse" type="text" id="users" class="form-control" placeholder="Saisir..">
-        <label for="users">email</label>
-        <input [ngClass]=" { 'is-invalid': submitted && f['email'].errors} " formControlName="email" type="text " id="users" class="form-control " placeholder="Saisir.. ">
-        <label for="users ">nom</label>
-        <input [ngClass]="{ 'is-invalid': submitted && f['nom'].errors} " formControlName="nom" type="text " id="users" class="form-control " placeholder="Saisir.. ">
-        <label for="users">Sexe</label>
-        <input [ngClass]="{ 'is-invalid': submitted && f['sexe'].errors} " formControlName="password" type="text " id="users" class="form-control " placeholder="Saisir.. ">
-        <label for="users">prenom</label>
-        <input [ngClass]="{ 'is-invalid': submitted && f['prenom'].errors} " formControlName="prenom" type="text " id="users" class="form-control " placeholder="Saisir.. ">
-        <label for="users">telephone</label>
-        <input [ngClass]="{ 'is-invalid': submitted && f['telephone'].errors} " formControlName="telephone" type=" text " id="users " class="form-control " placeholder="Saisir.. ">
-        <label for="users">Date naissance</label>
-        <input [ngClass]="{ 'is-invalid': submitted && f[ 'date_naissance'].errors} " formControlName="date_naissance" type=" text " id="users " class="form-control " placeholder="Saisir.. ">
+
+        <label for="Users">firstName</label>
+        <input formControlName="firstName" type="text" id="Users" class="form-control" placeholder="Saisir..">
+        <label for="Users">lastName</label>
+        <input formControlName="lastName" type="text" id="Users" class="form-control" placeholder="Saisir..">
+        <label for="Users">email</label>
+        <input formControlName="email" type="text" id="Users" class="form-control" placeholder="Saisir..">
+        <label for="Users">role </label>
+        <input formControlName="role" type="text" id="Users" class="form-control" placeholder="Saisir..">
+        <label for="Users">birthdate</label>
+        <input formControlName="birthdate" type="datetime-local" id="Users" class="form-control" placeholder="Saisir..">
+        <label for="Users">sex</label>
+        <input formControlName="sex" type="text" id="Users" class="form-control" placeholder="Saisir..">
+        <label for="Users">password</label>
+        <input formControlName="password" type="text" id="Users" class="form-control" placeholder="Saisir..">
         <button class="btn btn-outline-primary mt-3 btn-sm "> Ajouter</button>
     </div>
 

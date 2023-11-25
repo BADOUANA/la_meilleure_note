@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin
+@CrossOrigin("http://localhost:4200/")
 @RequestMapping("/api/rates")
 @AllArgsConstructor
 public class RateController {
@@ -40,7 +40,7 @@ public class RateController {
 
 
 
-    @GetMapping
+    @GetMapping("/list")
     public ResponseEntity<List<RateDTO>> getAllRates() {
         try {
             List<RateDTO> rateDTOs = rateService.getAllRates();

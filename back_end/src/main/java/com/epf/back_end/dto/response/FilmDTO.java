@@ -17,7 +17,7 @@ public class FilmDTO {
     private String author;
     private LocalDate outDate;
     private int time;
-    private List<Category> categories;
+    private String categories;
     private List<RateDTO> rates;
 
 }

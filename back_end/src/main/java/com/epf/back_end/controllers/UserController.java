@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin("http://localhost:4200/")
 @RequestMapping("/api/users")
 @AllArgsConstructor
 public class UserController {
     private final UserDao userDao;
     private final UserServiceImpl userServiceImpl;
 
-    @GetMapping("/{id}")
+    @GetMapping
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         try {
             UserDTO userDTO = userServiceImpl.getUserById(id);
@@ -31,7 +31,7 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @GetMapping
+    @GetMapping("/list")
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         try {
             List<UserDTO> userDTOs = userServiceImpl.getAllUsers();

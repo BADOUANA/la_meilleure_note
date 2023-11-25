@@ -17,5 +17,5 @@ public class FilmDTORequest {
     private String author;
     private LocalDate outDate;
     private int time;
-    private List<Category> categories;
+    private String categories;
 }

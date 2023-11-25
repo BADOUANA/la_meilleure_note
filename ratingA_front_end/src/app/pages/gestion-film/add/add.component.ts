@@ -13,12 +13,11 @@ export class AddComponent implements OnInit {
   }
   ngOnInit(): void {
    this.filmForm = this.fb.group({
-    titre:['',Validators.required],
-    autheur:['',Validators.required],
-    date_sortie:['',Validators.required],
-    categorie:['',Validators.required],
-    image:['',Validators.required]
-
+    title:['',Validators.required],
+    author:['',Validators.required],
+    outDate:['',Validators.required],
+    time:['',Validators.required],
+    categories:['',Validators.required]
   })
 
 }
@@ -29,10 +28,8 @@ submit() : void {
     return;
   }else{
     console.log(this.filmForm.value)
-
-
     this.cService.Postfilm(this.filmForm.value).subscribe(response =>{
-      console.log("Success")
+     console.log("Success")
 
 
     },error=>console.log(error))

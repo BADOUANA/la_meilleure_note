@@ -17,11 +17,11 @@ VALUES
 
 INSERT INTO films (id, title, author, out_date, time, category, image_id)
 VALUES
-    (1, 'The Shawshank Redemption', 'Frank Darabont', '1994-09-23', 120, ARRAY['ACTION', 'DRAMA'], 1),
-    (2, 'Forrest Gump', 'Robert Zemeckis', '1994-07-06', 90, ARRAY['DRAMA'], 2),
-    (3, 'Pulp Fiction', 'Quentin Tarantino', '1994-10-14', 110, ARRAY['THRILLER', 'MYSTERY'], 3),
-    (4, 'Inception', 'Christopher Nolan', '2010-07-16', 105, ARRAY['SCIENCE_FICTION', 'ADVENTURE'], 4),
-    (5, 'The Dark Knight', 'Christopher Nolan', '2008-07-18', 140, ARRAY['CRIME', 'MYSTERY'], 5);
+    (1, 'The Shawshank Redemption', 'Frank Darabont', '1994-09-23', 120, 'DRAMA', 1),
+    (2, 'Forrest Gump', 'Robert Zemeckis', '1994-07-06', 90, 'DRAMA', 2),
+    (3, 'Pulp Fiction', 'Quentin Tarantino', '1994-10-14', 110,'THRILLER', 3),
+    (4, 'Inception', 'Christopher Nolan', '2010-07-16', 105, 'ADVENTURE', 4),
+    (5, 'The Dark Knight', 'Christopher Nolan', '2008-07-18', 140, 'MYSTERY', 5);
 
 INSERT INTO rates (id,name, note, summary, detail_summary, film_id, user_id)
 VALUES

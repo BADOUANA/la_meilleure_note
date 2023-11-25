@@ -7,12 +7,13 @@ import { Observable } from 'rxjs';
 })
 export class FilmService {
 
-readonly API_URL = "http://localhost:8080/"
-readonly ENDPOINT_film ='films';
-readonly ENDPOINT_Onefilm='/films/{id}';
-readonly ENDPOINT_OneDelete ='/films/delete/';
-readonly ENDPOINT_OneUpd ='/films/update/';
-readonly ENDPOINT_Paging ='films';
+readonly API_URL = "http://localhost:8080"
+readonly ENDPOINT_film ='/api/films/list';
+readonly ENDPOINT_films ='/api/films';
+readonly ENDPOINT_Onefilm='/api/films/{id}';
+readonly ENDPOINT_OneDelete ='/api/films/delete/';
+readonly ENDPOINT_OneUpd ='/api/films/update/';
+readonly ENDPOINT_Paging ='/film/paging';
 
 
   constructor(private httpClient: HttpClient) { }
@@ -22,7 +23,7 @@ readonly ENDPOINT_Paging ='films';
 
   }
   Postfilm(data: any): Observable<any> {
-    return this.httpClient.post<any>(this.API_URL + this.ENDPOINT_film,data)
+    return this.httpClient.post<any>(this.API_URL + this.ENDPOINT_films,data)
 
   }
   getOnefilm(id: number): Observable<any> {

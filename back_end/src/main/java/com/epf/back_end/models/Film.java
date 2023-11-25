@@ -30,9 +30,8 @@ public class Film {
     private LocalDate outDate;
     @Column(name = "time")
     private int time;
-    @Enumerated(EnumType.STRING)
     @Column(name = "category")
-    private List<Category> categories;
+    private String categories;
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy="film")
     @JsonIgnore

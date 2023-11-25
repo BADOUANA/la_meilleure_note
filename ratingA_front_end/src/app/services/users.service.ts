@@ -6,12 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UsersService {
-readonly API_URL = "http://localhost:8080/"
-readonly ENDPOINT_user ='users';
-readonly ENDPOINT_OneUser='users/{id}';
-readonly ENDPOINT_OneDelete ='users/delete/';
-readonly ENDPOINT_OneUpd ='users/update/';
-readonly ENDPOINT_Paging ='users';
+readonly API_URL = "http://localhost:8080"
+readonly ENDPOINT_user ='/api/users/list';
+readonly ENDPOINT_use ='/api/users';
+readonly ENDPOINT_OneUser='api/users/{id}';
+readonly ENDPOINT_OneDelete ='/api/users/delete/';
+readonly ENDPOINT_OneUpd ='/api/users/update/';
+readonly ENDPOINT_Paging ='/users/paging';
 
 
   constructor(private httpClient: HttpClient) { }
@@ -21,7 +22,7 @@ readonly ENDPOINT_Paging ='users';
 
   }
   Postusers(data: any): Observable<any> {
-    return this.httpClient.post<any>(this.API_URL + this.ENDPOINT_user,data)
+    return this.httpClient.post<any>(this.API_URL + this.ENDPOINT_use,data)
 
   }
   getOneuser(id: number): Observable<any> {

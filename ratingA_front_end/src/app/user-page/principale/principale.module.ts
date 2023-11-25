@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PrincipaleRoutingModule } from './principale-routing.module';
@@ -23,6 +23,9 @@ import { NoteComponent } from './note/note.component';
     ReactiveFormsModule,
     FormsModule,
     NgxPaginationModule,
-  ]
+  ],
+  schemas: [
+    NO_ERRORS_SCHEMA
+  ],
 })
 export class PrincipaleModule { }

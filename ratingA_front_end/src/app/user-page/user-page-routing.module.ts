@@ -10,12 +10,18 @@ const routes: Routes = [
       {
 
           path: 'principale',
-          loadChildren: () => import("./principale/principale.module").then((m) => m.PrincipaleModule
-          )
+          loadChildren: () => import("./principale/principale.module").then((m) => m.PrincipaleModule)
+      },
+       {
 
-        ,
+          path: 'list',
+          loadChildren: () => import("./principale/list/list.module").then((m) => m.ListModule)
+      },
+      {
 
-      }
+        path: 'note',
+        loadChildren: () => import("./principale/note/note.module").then((m) => m.NoteModule)
+    }
     ]
   }
 ];

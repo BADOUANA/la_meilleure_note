@@ -26,25 +26,21 @@
                                         </div>
                                         <form [formGroup]="filmForm" (ngSubmit)="submit()">
                                             <div class="form-group">
-                                                <label for="film">titre</label>
-                                                <input formControlName="titre" type="text" id="film" class="form-control" placeholder="Saisir..">
-                                                <label for="film">autheur</label>
-                                                <input formControlName="autheur" type="text" id="film" class="form-control" placeholder="Saisir..">
-                                                <label for="film">date_sortie</label>
-                                                <input formControlName="date_sortie" type="text" id="film" class="form-control" placeholder="Saisir..">
-                                                <label for="film">categorie</label>
-                                                <input formControlName="categorie" type="text" id="film" class="form-control" placeholder="Saisir..">
+                                                <label for="title">Title</label>
+                                                <input formControlName="title" type="text" id="title" class="form-control" placeholder="Enter title...">
 
-                                                <div>
-                                                    <label for="film">image</label>
-                                                    <div>
-                                                        <input type="file" name="img" id="film" class="form-control-file">
-                                                    </div>
-                                                </div>
+                                                <label for="author">Author</label>
+                                                <input formControlName="author" type="text" id="author" class="form-control" placeholder="Enter author...">
 
+                                                <label for="outDate">Out Date</label>
+                                                <input formControlName="outDate" type="date" id="outDate" class="form-control" placeholder="Select date...">
 
+                                                <label for="time">Time</label>
+                                                <input formControlName="time" type="text" id="time" class="form-control" placeholder="Enter time...">
+
+                                                <label for="categories">Categories</label>
+                                                <input type="text" id="categories" formControlName="categories" placeholder="Entrer">
                                             </div>
 
-
-                                            <button class="btn btn-outline-primary mt-3 btn-sm "> Ajouter</button>
+                                            <button class="btn btn-outline-primary mt-3 btn-sm">Ajouter</button>
                                         </form>
