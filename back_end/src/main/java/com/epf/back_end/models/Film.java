@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class Film {
     @Column(name = "author")
     private String author;
     @Column(name = "out_date")
-    private String outDate;
+    private LocalDate outDate;
     @Column(name = "time")
     private int time;
     @Enumerated(EnumType.STRING)

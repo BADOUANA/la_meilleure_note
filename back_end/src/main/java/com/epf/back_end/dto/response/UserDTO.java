@@ -1,6 +1,5 @@
 package com.epf.back_end.dto.response;
 
-import com.epf.back_end.dto.RateDTO;
 import com.epf.back_end.enumer.Role;
 import lombok.Builder;
 import lombok.Getter;

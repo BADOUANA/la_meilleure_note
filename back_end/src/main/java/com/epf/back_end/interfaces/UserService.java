@@ -11,7 +11,7 @@ public interface UserService {
 
     List<UserDTO> getAllUsers() throws ResourceNotFoundException;
 
-    UserDTO createUser(UserDTORequest userDTORequest) throws Exception;
+    UserDTO createUser(UserDTORequest userDTORequest) throws RuntimeException;
 
     UserDTO updateUser(Long userId, UserDTORequest userDTORequest) throws ResourceNotFoundException;
 

@@ -1,7 +1,13 @@
 package com.epf.back_end.controllers;
 
 import com.epf.back_end.dao.FilmDao;
+import com.epf.back_end.dto.request.FilmDTORequest;
+import com.epf.back_end.dto.request.UserDTORequest;
+import com.epf.back_end.dto.response.FilmDTO;
+import com.epf.back_end.dto.response.UserDTO;
 import com.epf.back_end.exceptions.ResourceNotFoundException;
+import com.epf.back_end.interfaces.FilmService;
+import com.epf.back_end.interfaces.impl.FilmServiceImpl;
 import com.epf.back_end.models.Film;
 import com.epf.back_end.models.Rate;
 import lombok.AllArgsConstructor;
@@ -20,47 +26,53 @@ import java.util.Map;
 public class FilmController {
     
     private final FilmDao filmDao;
+    private final FilmService filmService;
 
-    @GetMapping("/list")
-    public List<Film> getFilms(){
-        return filmDao.findAll();
+    @GetMapping
+    public ResponseEntity<List<FilmDTO>> getAllFilms() {
+        try {
+            List<FilmDTO> filmDTOs = filmService.getAllFilms();
+            return new ResponseEntity<>(filmDTOs, HttpStatus.OK);
+        } catch (ResourceNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping
-    void addFilm(@RequestBody Film Film){
-        filmDao.save(Film);
+    public ResponseEntity<FilmDTO> createFilm(@RequestBody FilmDTORequest filmDTORequest) {
+        try {
+            FilmDTO createdFilm = filmService.createFilm(filmDTORequest);
+            return new ResponseEntity<>(createdFilm, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Film> getFilmById(@PathVariable(value = "id") Long id)
-            throws ResourceNotFoundException {
-        Film film = filmDao.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Film not found for this id :: " + id));
-        return ResponseEntity.ok().body(film);
+    public ResponseEntity<FilmDTO> getFilmById(@PathVariable(value = "id") Long id){
+        try {
+            FilmDTO filmDTO = filmService.getFilmById(id);
+            return new ResponseEntity<>(filmDTO, HttpStatus.OK);
+        } catch (ResourceNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Film> updateFilm(@PathVariable(value = "id") Long id,
-                                           @RequestBody Film film) throws ResourceNotFoundException {
-        Film existFilm = filmDao.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Film not found for this id :: " + id));
-
-        existFilm.setAuthor(film.getAuthor());
-        existFilm.setTitle(film.getTitle());
-        existFilm.setTime(film.getTime());
-        final Film updatedFilm = filmDao.save(existFilm);
-        return ResponseEntity.ok(updatedFilm);
+    public ResponseEntity<FilmDTO> updateFilm(@PathVariable(value = "id") Long id, @RequestBody FilmDTORequest filmDTORequest) {
+        try {
+            FilmDTO updatedFilm = filmService.updateFilm(id, filmDTORequest);
+            return new ResponseEntity<>(updatedFilm, HttpStatus.OK);
+        } catch (ResourceNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    @DeleteMapping("/film/{id}")
-    public Map<String, Boolean> deleteFilm(@PathVariable(value = "id") Long id)
-            throws ResourceNotFoundException {
-        Film film = filmDao.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Film not found for this id :: " + id));
-
-        filmDao.delete(film);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return response;
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        filmService.deleteFilm(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+
     @GetMapping("/{id}/myRates")
     public ResponseEntity<List<Rate>> getRatesByFilmId(@PathVariable Long id){
         List<Rate> rates = filmDao.getAllRatesFromFilm(id);

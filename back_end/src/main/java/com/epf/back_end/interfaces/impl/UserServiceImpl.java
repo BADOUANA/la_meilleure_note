@@ -21,25 +21,27 @@ public class UserServiceImpl implements UserService{
     private final UserDao userDao;
     private final UserMapper userMapper;
 
+    @Override
     public UserDTO getUserById(Long id) throws ResourceNotFoundException {
         User user = userDao.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
         return userMapper.userToUserDTO(user);
     }
 
+    @Override
     public List<UserDTO> getAllUsers() throws ResourceNotFoundException {
         List<User> users = userDao.findAll();
         List<UserDTO> dtoResponses = new ArrayList<>();
 
         for (User user : users) {
-            UserDTO dtoResponse = userMapper.userToUserDTO(user);
-            dtoResponses.add(dtoResponse);
+            UserDTO userDTO = userMapper.userToUserDTO(user);
+            dtoResponses.add(userDTO);
         }
         return dtoResponses;
     }
 
-    public UserDTO createUser(UserDTORequest userDTORequest) throws Exception {
-        // You might want to add validation logic here before creating the user
+    @Override
+    public UserDTO createUser(UserDTORequest userDTORequest) throws RuntimeException {
         try {
             User user = userMapper.userDTOToUser(userDTORequest);
             User savedUser = userDao.save(user);
@@ -48,13 +50,12 @@ public class UserServiceImpl implements UserService{
             throw new RuntimeException();
         }
 
-
     }
 
+    @Override
     public UserDTO updateUser(Long id, UserDTORequest userDTORequest) throws ResourceNotFoundException {
-        // Similar to create, you might want to add validation logic here
         User existingUser = userDao.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
 
         // Update the existingUser fields with data from userDTO
         userMapper.updateUserFromDTO(userDTORequest, existingUser);
@@ -64,6 +65,7 @@ public class UserServiceImpl implements UserService{
         return userMapper.userToUserDTO(updatedUser);
     }
 
+    @Override
     public void deleteUser(Long id) {
         userDao.deleteById(id);
     }

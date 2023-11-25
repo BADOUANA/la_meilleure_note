@@ -22,11 +22,6 @@ public class UserController {
     private final UserDao userDao;
     private final UserServiceImpl userServiceImpl;
 
-    @GetMapping("/list")
-    public List<User> getUsers(){
-        return (List<User>) userDao.findAll();
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         try {
