@@ -19,14 +19,6 @@ public interface UserMapper {
     User userDTOToUser(UserDTO userDTO);
 
     User userDTOToUser(UserDTORequest userDTORequest);
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "rates", ignore = true)
-    void updateUserFromDTO(UserDTO userDTO, @MappingTarget User user);
-
-    List<UserDTO> usersToUserDTOs(List<User> users);
-    List<User> userDTOsToUsers(List<UserDTO> userDTOs);
-
-
 
     void updateUserFromDTO(UserDTORequest userDTORequest, @MappingTarget User user);
 

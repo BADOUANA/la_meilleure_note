@@ -22,6 +22,4 @@ public interface FilmMapper {
     @Mapping(target = "rates", ignore = true)
     void updateFilmFromDTO(FilmDTORequest filmDTORequest, @MappingTarget Film film);
 
-    List<FilmDTO> filmsToFilmDTOs(List<Film> films);
-    List<Film> filmDTOsToFilms(List<FilmDTO> filmDTOs);
 }

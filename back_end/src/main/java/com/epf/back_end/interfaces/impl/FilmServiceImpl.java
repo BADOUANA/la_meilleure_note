@@ -99,18 +99,6 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public List<FilmDTO> getBestFilmByRates() throws ResourceNotFoundException {
-        List<Film> films = filmDao.getBestFilmByRates();
-        List<FilmDTO> dtoResponses = new ArrayList<>();
-
-        for (Film film : films) {
-            FilmDTO filmDTO = filmMapper.filmToFilmDTO(film);
-            dtoResponses.add(filmDTO);
-        }
-        return dtoResponses;
-    }
-
-    @Override
     public void updateFilmImage(Long userId, Long id, MultipartFile image) throws IOException, ResourceNotFoundException {
         Film existingFilm = filmDao.findById(id).orElseThrow(()->new RuntimeException("User not found"+id));
         Image existingImage = existingFilm.getImage();

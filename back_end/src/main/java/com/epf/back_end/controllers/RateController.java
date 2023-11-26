@@ -24,7 +24,6 @@ import java.util.Map;
 @AllArgsConstructor
 public class RateController {
 
-    private RateDao rateDao;
     private final RateService rateService;
 
     @GetMapping

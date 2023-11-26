@@ -17,8 +17,6 @@ public class RateDTO {
     private float note;
     private String summary;
     private String detailSummary;
-
-    // Assume these fields are not included in the DTO to enhance security
      private Film film;
      private User user;
 }

@@ -11,8 +11,4 @@ import java.util.List;
 
 @Repository
 public interface UserDao extends JpaRepository<User,Long> {
-    User findUserByFirstNameAndLastName(String firstName, String lastName);
-
-    @Query("SELECT r FROM Rate r WHERE r.user.id= :user_id")
-    List<Rate> getAllRatesFromUser(@Param("user_id")Long userId);
 }

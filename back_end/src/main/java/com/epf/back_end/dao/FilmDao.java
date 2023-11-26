@@ -29,7 +29,4 @@ public interface FilmDao extends JpaRepository<Film, Long> {
             "ORDER BY averageRate DESC")
     List<Film> getFilmsOrderByAverageRate();
 
-    @Query("SELECT f FROM Film f LEFT JOIN Rate r ON r.film.id = f.id WHERE r.note >= 8")
-    List<Film> getBestFilmByRates();
-
 }

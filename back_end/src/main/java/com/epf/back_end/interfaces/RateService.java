@@ -22,6 +22,4 @@ public interface RateService {
     List<RateDTO> getRatesByFilmId(Long id) throws ResourceNotFoundException;
 
 
-    /*List<RateDTO> getBestRates();*/
-
 }

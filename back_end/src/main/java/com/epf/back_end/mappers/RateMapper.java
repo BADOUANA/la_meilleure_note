@@ -28,7 +28,4 @@ public interface RateMapper  {
    @Mapping(source = "idUser", target = "user.id")
     void updateRateFromDTO(RateDTORequest rateDTORequest, @MappingTarget Rate rate);
 
-
-    List<RateDTO> ratesToRateDTOs(List<Rate> rates);
-    List<Rate> rateDTOsToRates(List<RateDTO> rateDTOs);
 }

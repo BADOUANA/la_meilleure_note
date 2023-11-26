@@ -23,7 +23,5 @@ public interface FilmService {
 
     List<FilmDTO> getFilmsOrderByAverageRate() throws ResourceNotFoundException;
 
-    List<FilmDTO> getBestFilmByRates() throws ResourceNotFoundException;
-
     void updateFilmImage(Long userId,Long id, MultipartFile image) throws IOException, ResourceNotFoundException;
 }

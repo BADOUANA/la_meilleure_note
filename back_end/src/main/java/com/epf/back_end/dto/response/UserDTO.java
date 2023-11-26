@@ -20,10 +20,7 @@ public class UserDTO {
     private Role role;
     private Instant birthdate;
     private String sex;
-
-    // Assume this field is not included in the DTO to enhance security
     private String password;
-
     private List<RateDTO> rates;
     private Image image;
 }
