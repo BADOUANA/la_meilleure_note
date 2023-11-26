@@ -1,15 +1,15 @@
-
 CREATE TABLE images (
                         id SERIAL PRIMARY KEY,
-                        bytes BYTEA,
-                        title TEXT
+                        title VARCHAR,
+                        type VARCHAR,
+                        image_data OID
 );
 
 
 CREATE TABLE users (
                        id SERIAL PRIMARY KEY,
-                       first_name TEXT NOT NULL,
-                       last_name TEXT NOT NULL,
+                       first_name VARCHAR NOT NULL,
+                       last_name VARCHAR NOT NULL,
                        role VARCHAR NOT NULL,
                        email VARCHAR NOT NULL,
                        sex VARCHAR NOT NULL,
@@ -20,8 +20,8 @@ CREATE TABLE users (
 
 CREATE TABLE films (
                        id SERIAL PRIMARY KEY,
-                       title TEXT,
-                       author TEXT,
+                       title VARCHAR,
+                       author VARCHAR,
                        out_date DATE,
                        time INT,
                        category VARCHAR[],
@@ -30,10 +30,11 @@ CREATE TABLE films (
 
 CREATE TABLE rates (
                        id SERIAL PRIMARY KEY,
-                       name TEXT NULL,
+                       name VARCHAR NULL,
                        note FLOAT NOT NULL,
-                       summary TEXT,
-                       detail_summary TEXT,
+                       summary VARCHAR,
+                       detail_summary VARCHAR,
                        film_id INT REFERENCES films (id),
                        user_id INT REFERENCES users (id)
 );
+

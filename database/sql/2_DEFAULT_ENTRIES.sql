@@ -1,10 +1,10 @@
-INSERT INTO images (id, title, bytes)
+INSERT INTO images (id, title,type, image_data)
 VALUES
-    (1, 'Image 1', NULL),
-    (2, 'Image 2', NULL),
-    (3, 'Image 3', NULL),
-    (4, 'Image 4', NULL),
-    (5, 'Image 5', NULL);
+    (1, 'Image 1','png', NULL),
+    (2, 'Image 2','png', NULL),
+    (3, 'Image 3','jpeg', NULL),
+    (4, 'Image 4','png', NULL),
+    (5, 'Image 5','jpeg', NULL);
 
 
 INSERT INTO users (id, first_name, last_name, birthdate, role, email, sex, password, image_id)
@@ -17,11 +17,11 @@ VALUES
 
 INSERT INTO films (id, title, author, out_date, time, category, image_id)
 VALUES
-    (1, 'The Shawshank Redemption', 'Frank Darabont', '1994-09-23', 120, ARRAY['Action', 'Drama'], 1),
-    (2, 'Forrest Gump', 'Robert Zemeckis', '1994-07-06', 90, ARRAY['Drama'], 2),
-    (3, 'Pulp Fiction', 'Quentin Tarantino', '1994-10-14', 110, ARRAY['Thriller', 'Mystery'], 3),
-    (4, 'Inception', 'Christopher Nolan', '2010-07-16', 105, ARRAY['Science Fiction', 'Adventure'], 4),
-    (5, 'The Dark Knight', 'Christopher Nolan', '2008-07-18', 140, ARRAY['Crime', 'Mystery'], 5);
+    (1, 'The Shawshank Redemption', 'Frank Darabont', '1994-09-23', 120, ARRAY['ACTION', 'DRAMA'], 1),
+    (2, 'Forrest Gump', 'Robert Zemeckis', '1994-07-06', 90, ARRAY['DRAMA'], 2),
+    (3, 'Pulp Fiction', 'Quentin Tarantino', '1994-10-14', 110, ARRAY['THRILLER', 'MYSTERY'], 3),
+    (4, 'Inception', 'Christopher Nolan', '2010-07-16', 105, ARRAY['SCIENCE_FICTION', 'ADVENTURE'], 4),
+    (5, 'The Dark Knight', 'Christopher Nolan', '2008-07-18', 140, ARRAY['CRIME', 'MYSTERY'], 5);
 
 INSERT INTO rates (id,name, note, summary, detail_summary, film_id, user_id)
 VALUES
