@@ -16,14 +16,12 @@ export class AddComponent implements OnInit {
 
   ngOnInit(): void {
    this.usersForm = this.fb.group({
-
-    adresse:['',Validators.required],
+    firstName:['',Validators.required],
+    lastName:['',Validators.required],
     email:['',Validators.required],
-    nom:['',Validators.required],
-    sexe:['',Validators.required],
-    date_naissance:['',Validators.required],
-    prenom:['',Validators.required],
-    telephone:['',Validators.required]
+    role:['',Validators.required],
+    sex:['',Validators.required],
+    password:['',Validators.required]
 
 
   })
@@ -33,10 +31,11 @@ get f(){return this.usersForm.controls}
 
 submit() : void {
   if(this.usersForm.invalid){
-    return;
+   // console.log(this.usersForm.value)
+   return;
   }else{
-    console.log(this.usersForm.value)
 
+    console.log(this.usersForm.value)
 
     this.cService.Postusers(this.usersForm.value).subscribe(response =>{
       console.log("Success")

@@ -7,6 +7,10 @@ import { NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 
 
 const routes: Routes = [
+  {
+    path: 'auth',
+    loadChildren:() =>import("./auth/auth.module").then((p) =>p.AuthModule)
+  },
 
       {
         path: 'pages',

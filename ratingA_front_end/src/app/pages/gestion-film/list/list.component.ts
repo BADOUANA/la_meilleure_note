@@ -19,9 +19,9 @@ export class ListComponent implements OnInit {
 constructor( private filmService:  FilmService){}
   ngOnInit(): void {
 
-//this.loadListfilm();
+this.loadListfilm();
 
-this.getfilmPaging();
+//this.getfilmPaging();
   }
 
   loadListfilm(): void {

@@ -11,6 +11,7 @@ const routes: Routes = [
   path: '',
   component: PagesComponent,
   children: [
+    
     {
       path: 'users',
       loadChildren: () => import("./gestion-users/gestion-users.module").then((m) => m.GestionUsersModule

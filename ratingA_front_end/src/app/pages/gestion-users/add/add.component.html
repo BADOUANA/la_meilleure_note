@@ -20,7 +20,7 @@
                                     <div class="mr-auto container-fluid p-2 bg-cyan fg-white" style="width: 950px">
                                         <div class="row mt-2">
                                             <div class="col-8 ">
-                                                <h1>Users </h1>
+                                                <h1>Creer un utlisateur</h1>
 
                                             </div>
                                         </div>
@@ -28,20 +28,20 @@
                                         <form [formGroup]="usersForm" (ngSubmit)="submit()">
                                             <div class="form-group">
 
-                                                <label for="Users">adresse</label>
-                                                <input formControlName="adresse" type="text" id="Users" class="form-control" placeholder="Saisir..">
+                                                <label for="Users">firstName</label>
+                                                <input formControlName="firstName" type="text" id="Users" class="form-control" placeholder="Saisir..">
+                                                <label for="Users">lastName</label>
+                                                <input formControlName="lastName" type="text" id="Users" class="form-control" placeholder="Saisir..">
                                                 <label for="Users">email</label>
                                                 <input formControlName="email" type="text" id="Users" class="form-control" placeholder="Saisir..">
-                                                <label for="Users">nom</label>
-                                                <input formControlName="nom" type="text" id="Users" class="form-control" placeholder="Saisir..">
-                                                <label for="Users">sexe</label>
-                                                <input formControlName="sexe" type="text" id="Users" class="form-control" placeholder="Saisir..">
-                                                <label for="Users">prenom </label>
-                                                <input formControlName="prenom" type="text" id="Users" class="form-control" placeholder="Saisir..">
-                                                <label for="Users">date_naissance</label>
-                                                <input formControlName="dare_naissance" type="text" id="Users" class="form-control" placeholder="Saisir..">
-                                                <label for="Users">telephone</label>
-                                                <input formControlName="telephone" type="text" id="Users" class="form-control" placeholder="Saisir..">
+                                                <label for="Users">role </label>
+                                                <input formControlName="role" type="text" id="Users" class="form-control" placeholder="Saisir..">
+                                                <label for="Users">birthdate</label>
+                                                <input formControlName="birthdate" type="datetime-local" id="Users" class="form-control" placeholder="Saisir..">
+                                                <label for="Users">sex</label>
+                                                <input formControlName="sex" type="text" id="Users" class="form-control" placeholder="Saisir..">
+                                                <label for="Users">password</label>
+                                                <input formControlName="password" type="text" id="Users" class="form-control" placeholder="Saisir..">
 
                                             </div>
 

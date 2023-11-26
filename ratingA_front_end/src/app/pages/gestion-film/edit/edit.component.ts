@@ -19,10 +19,11 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
 
       this.filmForm = this.fb.group({
-
-        titre:['',Validators.required],
-        autheur:['',Validators.required],
-        date_sortie:['',Validators.required],
+        title:['',Validators.required],
+        author:['',Validators.required],
+        outDate:['',Validators.required],
+        time:['',Validators.required],
+        categories:['',Validators.required]
       })
     this.setfilm(this.film);
   }
@@ -36,9 +37,11 @@ submit() : void {
     return;
   }else{
     const data= {
-      titre:this.f['tit'].value,
-      autheur:this.f['autheur'].value,
-      date_sortie : this.f['date_sortie'].value,
+      title:this.f['tit'].value,
+      author:this.f['author'].value,
+      outDate : this.f['outDate'].value,
+      time : this.f['time'].value,
+      categories : this.f['categories'].value,
 
 
     }
@@ -51,10 +54,11 @@ submit() : void {
 }
   setfilm=(c:any) => {
 
-    this.f['titre'].setValue(c.titre);
-    this.f['autheur'].setValue(c.autheur);
-    this.f['date_sortie'].setValue(c.date_sortie);
-    this.f['categorie'].setValue(c.categorie);
+    this.f['title'].setValue(c.title);
+    this.f['author'].setValue(c.author);
+    this.f['outDate'].setValue(c.outDate);
+    this.f['categories'].setValue(c.categories);
+    this.f['time'].setValue(c.time);
 
 
 

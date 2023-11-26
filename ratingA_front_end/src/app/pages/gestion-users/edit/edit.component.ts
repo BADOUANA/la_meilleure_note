@@ -19,14 +19,12 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
 
       this.usersForm = this.fb.group({
-
-        adresse:['',Validators.required],
+        firstName:['',Validators.required],
+        lastName:['',Validators.required],
         email:['',Validators.required],
-        nom:['',Validators.required],
-        sexe:['',Validators.required],
-        prenom:['',Validators.required],
-        telephone:['',Validators.required],
-        date_naissance:['',Validators.required]
+        role:['',Validators.required],
+        sex:['',Validators.required],
+        password:['',Validators.required]
       })
     this.setusers(this.users);
   }
@@ -40,13 +38,12 @@ submit() : void {
     return;
   }else{
     const data= {
-      adresse:this.f['adresse'].value,
+      firstName:this.f['firstName'].value,
+      lastName : this.f['lastName'].value,
       email:this.f['email'].value,
-      nom : this.f['nom'].value,
-      sexe : this.f['sexe'].value,
-      prenom : this.f['prenom'].value,
-      telephone : this.f['telephone'].value,
-      date_naissance : this.f['date_naissance'].value
+      sex : this.f['sex'].value,
+      role : this.f['role'].value,
+      password : this.f['password'].value
 
     }
     this.cService.Updateusers(data,this.users.push('id')).subscribe(response => {
@@ -58,13 +55,12 @@ submit() : void {
 }
   setusers=(c:any) => {
 
-    this.f['adresse'].setValue(c.adresse);
+    this.f['firstName'].setValue(c.firstName);
     this.f['email'].setValue(c.email);
-    this.f['nom'].setValue(c.nom);
+    this.f['lastName'].setValue(c.lastName);
     this.f['sexe'].setValue(c.sexe);
-    this.f['prenom'].setValue(c.prenom);
-    this.f['telephone'].setValue(c.telephone);
-    this.f['date_naissance'].setValue(c.date_naissance);
+    this.f['role'].setValue(c.role);
+    this.f['password'].setValue(c.password);
 
 
 

@@ -1,26 +1,25 @@
-<div class="mr-auto container-fluid p-2 bg-cyan fg-white" style="width: 950px">
-    <div class="row mt-2">
-        <div class="col-8 ">
-
-
+<div class="mx-auto container-fluid p-md-1 bg-cyan fg-white" style="width: 1200px; margin-right: 100px;">
+    <div class="row mt-6">
+        <div class="col-8 mx-auto text-center">
             <div class="bootstrap-table">
                 <div class="row mt-2">
-                    <div class="col-8 ">
-                        <h1>Liste des Users </h1>
-
+                    <div class="col-8 mx-auto">
+                        <h1>Liste des utilisateurs</h1>
                     </div>
                 </div>
-                <div class="row ">
-                    <div class="col--8">
-                        <app-list (UserEmitted)="get($event)"> </app-list>
+                <div class="row">
+                    <div class="col-8 mx-auto" style="width: 100%;">
+                        <app-list (UserEmitted)="get($event)"></app-list>
                     </div>
-                    <div class="col-4 ">
-                        <app-edit [users]="Usershared" *ngIf="isUpdating "> </app-edit>
+                    <div class="col-4 mx-auto">
+                        <app-edit [users]="Usershared" *ngIf="isUpdating"></app-edit>
                     </div>
-
                 </div>
-
-                <a class="btn btn-warning" href="/pages/users/add ">
-                    <i class="bi bi-grid "></i>
-                    <span>Ajouter un utilisateur </span>
+                <a class="btn btn-warning" href="/pages/users/add">
+                    <i class="bi bi-grid"></i>
+                    <span>Ajouter un utilisateur</span>
                 </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -18,9 +18,9 @@ export class ListComponent implements OnInit {
 constructor( private UserService:  UsersService){}
   ngOnInit(): void {
 
-//this.loadListusers();
+this.loadListusers();
 
-this.getusersPaging();
+//this.getusersPaging();
   }
 
   loadListusers(): void {

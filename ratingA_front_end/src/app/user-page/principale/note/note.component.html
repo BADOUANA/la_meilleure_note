@@ -1,43 +1,123 @@
-<div class="col-12 col-lg-9">
-    <!-- Comment Area Start -->
-    <div class="post-a-comment-area mb-100 clearfix">
-        <h4 class="mb-50">Veuillez remplir ces informations !</h4>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title -->
+    <title>Demande</title>
 
-        <!-- Reply Form -->
-        <div class="contact-form-area">
-            <form [formGroup]="noteForm" (ngSubmit)="submit()">
-                <div class="form-group">
-                    <div class="col-12 col-lg-6">
-                        <div class="col-12">
-                            <label for="user">user</label>
-                            <select formControlName="user_id" class="form-control" name="user" id="user">
-                  <option *ngFor="let d of listUser" value="{{d?.id}}">{{d?.nom_user}}</option>
-                </select>
-                        </div>
-                        v class="col-12 col-lg-6">
-                        <div class="col-12">
-                            <label for="user">user</label>
-                            <select formControlName="user_id" class="form-control" name="user" id="user">
-                  <option *ngFor="let d of listUser" value="{{d?.id}}">{{d?.prenom_user}}</option>
-                </select>
-                        </div>
-                        <div class="col-12">
-                            <label for="film">film</label>
-                            <select formControlName="film_id" class="form-control" name="film" id="film">
-                  <option *ngFor="let s of listFilm" value="{{s?.id}}">{{s?.nom_film}}</option>
-                  </select>
-                        </div>
-                        <div class="col-12">
-                            <label for="note"> note</label>
-                            <input formControlName="note" type="text" id="note" class="form-control" placeholder="Saisir..">
-                        </div>
-                    </div>
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/img/core-img/favicon-32x32.png">
 
-                    <div class="col-12">
-                        <button class="btn credit-btn mt-30" type="submit">Envoyer</button>
-                    </div>
-                </div>
-            </form>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/font awesome-bootsrap\fontawesome-free-5.12.1-web\css\all.min.css">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
     </div>
-</div>
+
+    <!-- ##### Header Area Start ##### -->
+
+
+    <body>
+        <!-- Preloader -->
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="lds-ellipsis">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+
+        <!-- ##### Header Area Start ##### -->
+
+        <!-- ##### Header Area End ##### -->
+
+        <!-- ##### Breadcrumb Area Start ##### -->
+        <section class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(/assets/img/bg-img/13.jpg);">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12">
+                        <div class="breadcrumb-content">
+                            <h2>Demande</h2>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/userpages/principale">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="/userpages/note">Noter</a></li>
+                                    <li class="breadcrumb-item active" aria-current="/userpages/List">List des films</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ##### Breadcrumb Area End ##### --><br>
+        <div class="col-12 col-lg-2"></div>
+        <div class="col-12 col-lg-12">
+            <div class="single-widget-area search-widget">
+
+            </div>
+        </div>
+        <div class="col-12 col-lg-9">
+            <!-- Comment Area Start -->
+            <div class="post-a-comment-area mb-100 clearfix">
+                <h4 class="mb-50">Veuillez attribuer votre note !</h4>
+
+                <!-- Reply Form -->
+                <div class="contact-form-area">
+                    <form [formGroup]="noteForm" (ngSubmit)="submit()">
+                        <div class="form-group">
+                            <div class="col-12 col-lg-6">
+                                <div class="col-12">
+                                    <label for="note">Name</label>
+                                    <input formControlName="name" type="text" id="name" class="form-control" placeholder="Saisir..">
+                                </div>
+                                <div class="col-12">
+                                    <label for="note"> note</label>
+                                    <input formControlName="note" type="number" id="note" class="form-control" placeholder="Saisir..">
+                                </div>
+                                <div class="col-12">
+                                    <label for="note">Summary</label>
+                                    <input formControlName="summary" type="text" id="summary" class="form-control" placeholder="Saisir..">
+                                </div>
+                                <div class="col-12">
+                                    <label for="note">detailSummary</label>
+                                    <input formControlName="detailSummary" type="text" id="detailSummary" class="form-control" placeholder="Saisir..">
+                                </div>
+                                <div class="col-12">
+                                    <label for="film">film</label>
+                                    <select formControlName="film_id" class="form-control" name="film" id="film">
+                <option *ngFor="let s of listFilm" value="{{s?.id}}">{{s?.title}}</option>
+                </select>
+                                </div>
+                                <div class="col-12">
+                                    <label for="user">user</label>
+                                    <select formControlName="user_id" class="form-control" name="user" id="user">
+                  <option *ngFor="let d of listUser" value="{{d?.id}}">{{d?.firstName}}</option>
+                </select>
+                                </div>
+
+                            </div>
+
+                            <div class="col-12">
+                                <button class="btn credit-btn mt-30" type="submit">Envoyer</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
