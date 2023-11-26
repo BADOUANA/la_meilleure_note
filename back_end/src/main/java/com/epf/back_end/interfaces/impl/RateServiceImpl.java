@@ -32,8 +32,9 @@ public class RateServiceImpl implements RateService {
 
     @Override
     public RateDTO getRateById(Long id) throws ResourceNotFoundException {
-        Rate rate = rateDao.findById(id).orElse(null);
-        return (rate != null) ? rateMapper.rateToRateDTO(rate) : null;
+        Rate rate = rateDao.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Rate not found with id: " + id));
+        return rateMapper.rateToRateDTO(rate);
     }
 
     @Override
@@ -72,29 +73,62 @@ public class RateServiceImpl implements RateService {
                 throw new ResourceNotFoundException("Verify if user exist ");
             }
         }catch (Exception e){
-            e.printStackTrace();
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 
 
     @Override
-    public RateDTO updateRate(Long id, RateDTORequest rateDTORequest) throws ResourceNotFoundException{
+    public RateDTO updateRate(Long userId, Long id, RateDTORequest rateDTORequest) throws ResourceNotFoundException{
+
         Rate existingRate = rateDao.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
-        rateMapper.updateRateFromDTO(rateDTORequest, existingRate);
-        Rate updatedRate = rateDao.save(existingRate);
-        return rateMapper.rateToRateDTO(updatedRate);
+        if (existingRate.getUser().getId() == userId){
+            rateMapper.updateRateFromDTO(rateDTORequest, existingRate);
+            Rate updatedRate = rateDao.save(existingRate);
+            return rateMapper.rateToRateDTO(updatedRate);
+        }else {
+            throw new ResourceNotFoundException("You are not authorized to update this rate");
+        }
+
+
+
     }
 
     @Override
-    public void deleteRate(Long id) {
-        rateDao.deleteById(id);
+    public void deleteRate(Long userId, Long id) throws ResourceNotFoundException{
+        Rate existingRate = rateDao.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+        if (existingRate.getUser().getId() == userId){
+            rateDao.deleteById(id);
+        }else {
+            throw new ResourceNotFoundException("You are not authorized to delete this rate");
+        }
+
     }
 
-    /*@Override
-    public List<RateDTO> getBestRates() {
-        List<Rate> bestRates = rateDao.getBestRates();
-        return rateMapper.ratesToRateDTOs(bestRates);
-    }*/
+
+    @Override
+    public List<RateDTO> getRatesByUserId(Long id) throws ResourceNotFoundException {
+        List<Rate> rates = rateDao.getAllRatesFromUser(id);
+        List<RateDTO> dtoResponses = new ArrayList<>();
+
+        for (Rate rate : rates) {
+            RateDTO rateDTO = rateMapper.rateToRateDTO(rate);
+            dtoResponses.add(rateDTO);
+        }
+        return dtoResponses;
+    }
+
+    @Override
+    public List<RateDTO> getRatesByFilmId(Long id) throws ResourceNotFoundException {
+        List<Rate> rates = rateDao.getAllRatesFromFilm(id);
+        List<RateDTO> dtoResponses = new ArrayList<>();
+
+        for (Rate rate : rates) {
+            RateDTO rateDTO = rateMapper.rateToRateDTO(rate);
+            dtoResponses.add(rateDTO);
+        }
+        return dtoResponses;
+    }
 }

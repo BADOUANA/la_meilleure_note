@@ -1,25 +1,37 @@
 package com.epf.back_end.interfaces.impl;
 
+import com.epf.back_end.dao.ImageDao;
 import com.epf.back_end.dao.UserDao;
 import com.epf.back_end.dto.request.UserDTORequest;
+import com.epf.back_end.dto.response.RateDTO;
 import com.epf.back_end.dto.response.UserDTO;
 import com.epf.back_end.exceptions.ResourceNotFoundException;
+import com.epf.back_end.interfaces.ImageService;
 import com.epf.back_end.interfaces.UserService;
 import com.epf.back_end.mappers.UserMapper;
+import com.epf.back_end.models.Image;
+import com.epf.back_end.models.Rate;
 import com.epf.back_end.models.User;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
 
     private final UserDao userDao;
     private final UserMapper userMapper;
+    private final ImageService imageService;
+
 
     @Override
     public UserDTO getUserById(Long id) throws ResourceNotFoundException {
@@ -39,6 +51,8 @@ public class UserServiceImpl implements UserService{
         }
         return dtoResponses;
     }
+
+
 
     @Override
     public UserDTO createUser(UserDTORequest userDTORequest) throws RuntimeException {
@@ -68,5 +82,17 @@ public class UserServiceImpl implements UserService{
     @Override
     public void deleteUser(Long id) {
         userDao.deleteById(id);
+    }
+
+    @Override
+    public void updateUserImage(Long id, MultipartFile image) throws  IOException {
+        User existingUser = userDao.findById(id).orElseThrow(()->new RuntimeException("User not found"+id));
+        Image existingImage = existingUser.getImage();
+        if (existingImage != null){
+            imageService.updateImage(existingImage.getId(),image);
+        }else {
+            throw new RuntimeException();
+        }
+
     }
 }

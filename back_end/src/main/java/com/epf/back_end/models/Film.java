@@ -38,6 +38,10 @@ public class Film {
     @JsonIgnore
     private List<Rate> rates = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name = "image_id", referencedColumnName = "id")
+    @JsonIgnore
+    private Image image;
 
 
 }

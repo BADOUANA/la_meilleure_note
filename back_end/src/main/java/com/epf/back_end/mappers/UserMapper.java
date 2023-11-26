@@ -14,7 +14,6 @@ import java.util.List;
 @Mapper(componentModel = "spring", implementationName = "UserMapperImpl")
 public interface UserMapper {
 
-    @Mapping(target = "rates", ignore = true)
     UserDTO userToUserDTO(User user);
 
     User userDTOToUser(UserDTO userDTO);

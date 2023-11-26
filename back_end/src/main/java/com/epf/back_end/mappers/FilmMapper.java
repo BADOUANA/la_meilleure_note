@@ -11,7 +11,6 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", implementationName = "FilmMapperImpl")
 public interface FilmMapper {
-    @Mapping(target = "rates", ignore = true)
     FilmDTO filmToFilmDTO(Film film);
 
     Film filmDTOToFilm(FilmDTO filmDTO);

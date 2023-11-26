@@ -13,9 +13,14 @@ public interface RateService {
 
     RateDTO createRate(Long userId, Long filmId,RateDTORequest rateDTORequest )throws RuntimeException;
 
-    RateDTO updateRate(Long rateId, RateDTORequest rateDTORequest)throws ResourceNotFoundException;
+    RateDTO updateRate(Long userId,Long rateId, RateDTORequest rateDTORequest)throws ResourceNotFoundException;
 
-    void deleteRate(Long id);
+    void deleteRate(Long userId, Long id) throws ResourceNotFoundException;
+
+    List<RateDTO> getRatesByUserId(Long id) throws ResourceNotFoundException;
+
+    List<RateDTO> getRatesByFilmId(Long id) throws ResourceNotFoundException;
+
 
     /*List<RateDTO> getBestRates();*/
 

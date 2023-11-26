@@ -25,6 +25,9 @@ public class Image {
     @OneToOne(mappedBy = "image")
     private User user;
 
+    @OneToOne(mappedBy = "image")
+    private Film film;
+
     public Image(String title, String type, byte[] bytes) {
         this.title = title;
         this.type = type;

@@ -18,4 +18,5 @@ public class FilmDTORequest {
     private LocalDate outDate;
     private int time;
     private List<Category> categories;
+    private Long imageId;
 }

@@ -1,6 +1,7 @@
 package com.epf.back_end.dto.response;
 
 import com.epf.back_end.enumer.Category;
+import com.epf.back_end.models.Image;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,5 +20,6 @@ public class FilmDTO {
     private int time;
     private List<Category> categories;
     private List<RateDTO> rates;
+    private Image image;
 
 }

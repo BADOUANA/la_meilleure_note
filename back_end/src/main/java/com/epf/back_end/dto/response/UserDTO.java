@@ -1,6 +1,7 @@
 package com.epf.back_end.dto.response;
 
 import com.epf.back_end.enumer.Role;
+import com.epf.back_end.models.Image;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,4 +25,5 @@ public class UserDTO {
     private String password;
 
     private List<RateDTO> rates;
+    private Image image;
 }

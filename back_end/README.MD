@@ -16,6 +16,11 @@
 
 #
 
+### Quelques specifications
+
 ###### - Run DROP uniquement si tu veux refaire les tables 
 ###### - Pour refaire un compose up, supprime le precedent contenaire crée, ou crée en un avec un nom différent
 ###### - Si les premières données sont entrées manuellement, il faudra faire le post un nombre de fois égale au nombre initiales de données entrées manuellement avant de pouvoir ajouter de nouvelles données dans la BD 
+###### - Seul un utilisateur ADMIN peut créer une image
+###### - Seul un ADMIN peut changer l'image d'un film
+###### - Seul le createur d'un Rate peut en modifier son contenu ou le supprimer

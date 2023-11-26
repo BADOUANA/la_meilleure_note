@@ -20,4 +20,5 @@ public class UserDTORequest {
 
     // Assume this field is not included in the DTO to enhance security
     private String password;
+    private Long imageId;
 }

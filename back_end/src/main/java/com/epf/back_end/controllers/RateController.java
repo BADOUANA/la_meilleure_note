@@ -6,6 +6,7 @@ import com.epf.back_end.dto.request.UserDTORequest;
 import com.epf.back_end.dto.response.RateDTO;
 import com.epf.back_end.dto.response.UserDTO;
 import com.epf.back_end.exceptions.ResourceNotFoundException;
+import com.epf.back_end.interfaces.RateService;
 import com.epf.back_end.interfaces.impl.RateServiceImpl;
 import com.epf.back_end.models.Rate;
 import lombok.AllArgsConstructor;
@@ -24,21 +25,7 @@ import java.util.Map;
 public class RateController {
 
     private RateDao rateDao;
-    private final RateServiceImpl rateService;
-
-
-    /*@GetMapping("/bestNotes")
-    public List<Rate> getBestRates(){
-        return (List<Rate>) rateDao.getBestRates();
-    }*/
-
-
-    @PostMapping
-    void addRate(@RequestBody Rate rate){
-        rateDao.save(rate);
-    }
-
-
+    private final RateService rateService;
 
     @GetMapping
     public ResponseEntity<List<RateDTO>> getAllRates() {
@@ -72,30 +59,31 @@ public class RateController {
     }
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Rate> updateRate(@PathVariable(value = "id") Long id,
-                                           @RequestBody Rate rate) throws ResourceNotFoundException {
-        Rate existRate = rateDao.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Rate not found for this id :: " + id));
-
-        existRate.setNote(rate.getNote());
-        existRate.setSummary(rate.getSummary());
-        existRate.setDetailSummary(rate.getDetailSummary());
-        final Rate updatedRate = rateDao.save(existRate);
+    @PutMapping("/{idUser}/{id}")
+    public ResponseEntity<RateDTO> updateRate(@PathVariable(value = "idUser") Long idUser,
+                                           @PathVariable(value = "id") Long id,
+                                           @RequestBody RateDTORequest rateDTORequest) throws ResourceNotFoundException {
+        RateDTO updatedRate = rateService.updateRate(idUser, id, rateDTORequest);
         return ResponseEntity.ok(updatedRate);
     }
 
-    @DeleteMapping("/rate/{id}")
-    public Map<String, Boolean> deleteRate(@PathVariable(value = "id") Long id)
+    @DeleteMapping("/{idUser}/{id}")
+    public ResponseEntity<String> deleteRate(@PathVariable(value = "idUser") Long idUser,@PathVariable(value = "id") Long id)
             throws ResourceNotFoundException {
-        Rate rate = rateDao.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Rate not found for this id :: " + id));
-
-        rateDao.delete(rate);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return response;
+        rateService.deleteRate(idUser, id);
+        return ResponseEntity.ok("Rate deleted successfully");
     }
-    
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<RateDTO>> getRatesByUserId(@PathVariable Long id) throws ResourceNotFoundException {
+        List<RateDTO> rates = rateService.getRatesByUserId(id);
+        return ResponseEntity.ok(rates);
+    }
+
+    @GetMapping("/film/{id}")
+    public ResponseEntity<List<RateDTO>> getRatesByFilmId(@PathVariable Long id) throws ResourceNotFoundException {
+        List<RateDTO> rates = rateService.getRatesByFilmId(id);
+        return ResponseEntity.ok(rates);
+    }
     
 }

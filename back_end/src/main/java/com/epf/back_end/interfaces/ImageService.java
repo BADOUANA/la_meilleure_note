@@ -4,6 +4,7 @@ import com.epf.back_end.models.Image;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface ImageService {
     byte[] compressBytes(byte[] data);
@@ -15,5 +16,11 @@ public interface ImageService {
     Image getImageById(Long id) throws IOException;
 
     Image addImage(MultipartFile file)throws IOException;
+
+    Image updateImage(Long id, MultipartFile file) throws IOException;
+
+    List<Image> getAllImages() throws IOException;
+
+
 
 }

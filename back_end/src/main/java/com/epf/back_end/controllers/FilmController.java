@@ -38,6 +38,16 @@ public class FilmController {
         }
     }
 
+    @GetMapping("/best")
+    public ResponseEntity<List<FilmDTO>> getFilmsOrderByAverageRate() {
+        try {
+            List<FilmDTO> filmDTOs = filmService.getFilmsOrderByAverageRate();
+            return new ResponseEntity<>(filmDTOs, HttpStatus.OK);
+        } catch (ResourceNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PostMapping
     public ResponseEntity<FilmDTO> createFilm(@RequestBody FilmDTORequest filmDTORequest) {
         try {
@@ -53,6 +63,17 @@ public class FilmController {
             FilmDTO filmDTO = filmService.getFilmById(id);
             return new ResponseEntity<>(filmDTO, HttpStatus.OK);
         } catch (ResourceNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+    @GetMapping("/{id}/avgNote")
+    public ResponseEntity<Double> getAverageRatingForFilm(@PathVariable(value = "id") Long id){
+        try {
+            Double noteMoy = filmService.getAverageRatingForFilm(id);
+            return new ResponseEntity<>(noteMoy, HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

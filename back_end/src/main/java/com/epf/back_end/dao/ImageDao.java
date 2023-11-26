@@ -9,5 +9,6 @@ import java.util.Optional;
 @Repository
 public interface ImageDao extends JpaRepository<Image,Long> {
     Optional<Image> findByTitle(String name);
+    Optional<Image> findById(Long id);
 
 }
