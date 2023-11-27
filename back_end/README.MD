@@ -24,6 +24,7 @@
 ##### - Seul un utilisateur ADMIN peut créer une image
 ##### - Seul un ADMIN peut changer l'image d'un film
 ##### - Seul le createur d'un Rate peut en modifier son contenu ou le supprimer
+##### - Tests de non-regression effectués sur postman, si la colonne "image" ne s'affiche pas directemnt, veuillez redemarrer docker ou votre PC 
 
 ###### A ajouter dans le application properties
 ```
