@@ -33,17 +33,20 @@ public class FilmServiceImpl implements FilmService {
     private final ImageService imageService;
     private final UserService userService;
 
+    // Retrieves a FilmDTO by its ID
     @Override
     public FilmDTO getFilmById(Long id) throws ResourceNotFoundException {
         Film film = filmDao.findById(id).orElseThrow(() -> new ResourceNotFoundException("Film not found with id: " + id));
         return filmMapper.filmToFilmDTO(film);
     }
 
+    // Retrieves a list of all FilmDTOs
     @Override
     public List<FilmDTO> getAllFilms() throws ResourceNotFoundException {
         List<Film> films = filmDao.findAll();
         List<FilmDTO> dtoResponses = new ArrayList<>();
 
+        // Maps each Film to a FilmDTO and adds it to the list
         for (Film film : films) {
             FilmDTO filmDTO = filmMapper.filmToFilmDTO(film);
             dtoResponses.add(filmDTO);
@@ -51,6 +54,7 @@ public class FilmServiceImpl implements FilmService {
         return dtoResponses;
     }
 
+    // Creates a new Film and returns its corresponding FilmDTO
     @Override
     public FilmDTO createFilm(FilmDTORequest filmDTORequest) throws RuntimeException {
         try {
@@ -62,6 +66,7 @@ public class FilmServiceImpl implements FilmService {
         }
     }
 
+    // Updates an existing Film and returns its corresponding FilmDTO
     @Override
     public FilmDTO updateFilm(Long id, FilmDTORequest filmDTORequest)throws ResourceNotFoundException {
         Film existingFilm = filmDao.findById(id)
@@ -71,11 +76,13 @@ public class FilmServiceImpl implements FilmService {
         return filmMapper.filmToFilmDTO(updatedFilm);
     }
 
+    // Deletes a Film by its ID
     @Override
     public void deleteFilm(Long id) {
             filmDao.deleteById(id);
     }
 
+    // Retrieves the average rating for a Film by its ID
     @Override
     public Double getAverageRatingForFilm(Long id) {
         Optional<Film> film = filmDao.findById(id);
@@ -86,6 +93,7 @@ public class FilmServiceImpl implements FilmService {
         }
     }
 
+    // Updates the image of a Film, requires admin privileges
     @Override
     public List<FilmDTO> getFilmsOrderByAverageRate() throws ResourceNotFoundException {
         List<Film> films = filmDao.getFilmsOrderByAverageRate();
@@ -103,6 +111,8 @@ public class FilmServiceImpl implements FilmService {
         Film existingFilm = filmDao.findById(id).orElseThrow(()->new RuntimeException("User not found"+id));
         Image existingImage = existingFilm.getImage();
         UserDTO userDTO = userService.getUserById(userId);
+
+        // If an image exists and the user has admin privileges, update the image
         if (existingImage != null && userDTO.getRole().equals(Role.ADMIN)){
             imageService.updateImage(existingImage.getId(),image);
         }else {

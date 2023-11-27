@@ -24,14 +24,20 @@ public class ImageServiceImpl implements ImageService {
     private final ImageDao imageDao;
     @Override
     public byte[] compressBytes(byte[] data) {
+        // Create a Deflater object for compressing data
         Deflater deflater = new Deflater();
+        // Set the input data for compression
         deflater.setInput(data);
         deflater.finish();
 
+        // Create a ByteArrayOutputStream to store the compressed data
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        // Create a buffer to hold chunks of compressed data
         byte[] buffer = new byte[1024];
         while (!deflater.finished()) {
+            // Compress a chunk of data into the buffer and get the count of compressed bytes
             int count = deflater.deflate(buffer);
+            // Write the compressed data from the buffer to the ByteArrayOutputStream
             outputStream.write(buffer, 0, count);
         }
         try {
@@ -46,11 +52,17 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public byte[] decompressBytes(byte[] data) {
+        // Create an Inflater object for decompressing data
         Inflater inflater = new Inflater();
+        // Set the input data for decompression
         inflater.setInput(data);
+
+        // Create a ByteArrayOutputStream to store the decompressed data
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        // Create a buffer to hold chunks of decompressed data
         byte[] buffer = new byte[1024];
         try {
+            // Continue decompressing data until the Inflater has finished
             while (!inflater.finished()){
                 int count = inflater.inflate(buffer);
                 outputStream.write(buffer,0,count);
@@ -66,6 +78,7 @@ public class ImageServiceImpl implements ImageService {
     public Image getImageByName(String name) throws IOException {
         Optional<Image> retrievedImage = imageDao.findByTitle(name);
         if(retrievedImage.isPresent()){
+            // If the image is found, return a new Image instance with the decompressed data
             return new Image(retrievedImage.get().getTitle(),retrievedImage.get().getType(),decompressBytes(retrievedImage.get().getImage_data()));}
         else {
             throw new IOException();
@@ -84,6 +97,7 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Image addImage(MultipartFile file) throws IOException {
+        // Create a new Image instance with the compressed data from the file and save it to the database
         Image image = new Image(file.getOriginalFilename(), file.getContentType(),
                 compressBytes(file.getBytes()));
         return imageDao.save(image);
@@ -94,6 +108,7 @@ public class ImageServiceImpl implements ImageService {
         Optional<Image> existingImageOptional = imageDao.findById(id);
         if (existingImageOptional.isPresent()) {
             Image existingImage = existingImageOptional.get();
+            // If the existing image is found, update its properties with information from the new file
 
             existingImage.setTitle(file.getOriginalFilename());
             existingImage.setType(file.getContentType());

@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
+@Transactional // Transactional annotation ensures that each method is wrapped by a transaction
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
 
@@ -42,7 +42,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public List<UserDTO> getAllUsers() throws ResourceNotFoundException {
+        // Retrieve all users from the database
         List<User> users = userDao.findAll();
+        // Map each User entity to UserDTO and collect in a list
         List<UserDTO> dtoResponses = new ArrayList<>();
 
         for (User user : users) {
@@ -68,13 +70,15 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDTO updateUser(Long id, UserDTORequest userDTORequest) throws ResourceNotFoundException {
+        // Find the existing user by ID or throw an exception if not found
+
         User existingUser = userDao.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
 
         // Update the existingUser fields with data from userDTO
         userMapper.updateUserFromDTO(userDTORequest, existingUser);
 
-
+        // Save the updated user to the database and return the mapped UserDTO
         User updatedUser = userDao.save(existingUser);
         return userMapper.userToUserDTO(updatedUser);
     }
@@ -87,6 +91,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public void updateUserImage(Long id, MultipartFile image) throws  IOException {
         User existingUser = userDao.findById(id).orElseThrow(()->new RuntimeException("User not found"+id));
+        // Get the existing image associated with the user
         Image existingImage = existingUser.getImage();
         if (existingImage != null){
             imageService.updateImage(existingImage.getId(),image);

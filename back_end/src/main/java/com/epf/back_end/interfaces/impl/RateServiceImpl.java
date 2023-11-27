@@ -51,12 +51,15 @@ public class RateServiceImpl implements RateService {
 
     @Override
     public RateDTO createRate(Long userId, Long filmId, RateDTORequest rateDTORequest) throws RuntimeException{
+        // Find Film and User by their IDs
         Optional<Film> film = filmDao.findById(filmId);
         Optional<User> user = userDao.findById(userId);
         try {
             if (user.isPresent()){
+                // Set User ID in RateDTORequest
                 rateDTORequest.setIdUser(userId);
                 if (film.isPresent()){
+                    // Set Film ID in RateDTORequest
                     rateDTORequest.setIdFilm(filmId);
                     try {
                         Rate rate = rateMapper.rateDTOResquestToRate(rateDTORequest);
@@ -83,6 +86,8 @@ public class RateServiceImpl implements RateService {
 
         Rate existingRate = rateDao.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+
+        // Check if the user is authorized to update this rate
         if (existingRate.getUser().getId() == userId){
             rateMapper.updateRateFromDTO(rateDTORequest, existingRate);
             Rate updatedRate = rateDao.save(existingRate);
@@ -99,6 +104,8 @@ public class RateServiceImpl implements RateService {
     public void deleteRate(Long userId, Long id) throws ResourceNotFoundException{
         Rate existingRate = rateDao.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+
+        // Check if the user is authorized to delete this rate and delete it
         if (existingRate.getUser().getId() == userId){
             rateDao.deleteById(id);
         }else {
@@ -113,6 +120,7 @@ public class RateServiceImpl implements RateService {
         List<Rate> rates = rateDao.getAllRatesFromUser(id);
         List<RateDTO> dtoResponses = new ArrayList<>();
 
+        // Convert each Rate entity to RateDTO using the mapper and collect in a list
         for (Rate rate : rates) {
             RateDTO rateDTO = rateMapper.rateToRateDTO(rate);
             dtoResponses.add(rateDTO);
