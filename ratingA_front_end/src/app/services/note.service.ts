@@ -8,11 +8,12 @@ import { Observable } from 'rxjs';
 export class NoteService {
 
   readonly API_URL = "http://localhost:8080"
-  readonly ENDPOINT_note ='/note';
-  readonly ENDPOINT_Onenote='/note/{id}';
-  readonly ENDPOINT_OneDelete ='/note/delete/';
-  readonly ENDPOINT_OneUpd ='/note/update/';
-  readonly ENDPOINT_Paging ='/note/paging';
+  readonly ENDPOINT_note ='/api/rates/list';
+  readonly ENDPOINT_notes ='/api/rates';
+  readonly ENDPOINT_Onenote ='/api/rates/{id}';
+  readonly ENDPOINT_OneDelete ='/api/rates/delete/';
+  readonly ENDPOINT_OneUpd ='/api/rates/update/';
+  readonly ENDPOINT_Paging ='/api/rates/paging';
 
 
     constructor(private httpClient: HttpClient) { }
@@ -22,7 +23,7 @@ export class NoteService {
 
     }
     Postnote(data: any): Observable<any> {
-      return this.httpClient.post<any>(this.API_URL + this.ENDPOINT_note,data)
+      return this.httpClient.post<any>(this.API_URL + this.ENDPOINT_notes,data)
 
     }
     getOnenote(id: number): Observable<any> {

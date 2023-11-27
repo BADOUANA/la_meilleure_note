@@ -22,7 +22,10 @@ export class NoteComponent implements OnInit{
   ngOnInit(): void {
     this.submitted = true;
     this.noteForm = this.fb.group({
+      name:['',Validators.required],
       note:['',Validators.required],
+      summary:['',Validators.required],
+      detailSummary:['',Validators.required],
       film_id: ['',Validators.required],
       user_id: ['',Validators.required]
   })
@@ -54,7 +57,7 @@ get f(){return this.noteForm.controls}
 
 submit() : void {
   if(this.noteForm.invalid){
-    console.log(this.noteForm.value)
+   // console.log(this.noteForm.value)
     return;
   }else{
     console.log(this.noteForm.value)

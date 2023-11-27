@@ -18,9 +18,9 @@ export class ListComponent implements OnInit {
 constructor( private NoteService:  NoteService){}
   ngOnInit(): void {
 
-//this.loadListnote();
+this.loadListnote();
 
-this.getnotePaging();
+//this.getnotePaging();
   }
 
   loadListnote(): void {

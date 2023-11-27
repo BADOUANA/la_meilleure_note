@@ -18,9 +18,9 @@ export class ListComponent implements OnInit {
 constructor( private filmService:  FilmService){}
   ngOnInit(): void {
 
-//this.loadListfilm();
+this.loadListfilm();
 
-this.getfilmPaging();
+//this.getfilmPaging();
   }
 
   loadListfilm(): void {
@@ -87,13 +87,12 @@ oneDelete =(id: number) =>{
 
 
 }
-GiveNoting = (film: any) =>{
+oneUpdate = (films: any) =>{
 
-  if(confirm("Are you sure you want to note")){
-    this.filmEmitted.emit(film);
-
-}
-}
+  if(confirm("Are you sure you want to update")){
+    this.filmEmitted.emit(films);
 
 }
+}
 
+}
